@@ -3,459 +3,210 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0e2a22">
-<title>Micelio · pequeños hábitos que crecen</title>
+<meta name="theme-color" content="#123e32">
+<title>Micelio · lectura y pequeños hábitos</title>
 <style>
 :root{
   color-scheme:light;
-  --bg:#f6f3ea;
-  --bg2:#ece7db;
-  --surface:rgba(255,255,255,.78);
-  --surface-solid:#fffdf8;
-  --surface-2:#eef3ec;
-  --text:#18332b;
-  --muted:#6f7e77;
-  --line:rgba(30,65,54,.12);
-  --primary:#1c6b55;
-  --primary-2:#2f8d6e;
-  --accent:#c98747;
-  --accent-soft:#f2dfc8;
-  --good:#2f8d6e;
-  --warn:#c98747;
-  --danger:#b5564e;
-  --shadow:0 22px 60px rgba(35,55,47,.14);
-  --shadow-soft:0 12px 35px rgba(35,55,47,.10);
-  --radius:26px;
-  --radius-sm:18px;
-  --blur:blur(18px) saturate(135%);
-  --serif:ui-serif,Georgia,"Times New Roman",serif;
+  --bg:#f6f3eb;--bg2:#ebe6da;--surface:rgba(255,255,255,.80);--solid:#fffdf8;
+  --surface2:#edf3ee;--text:#18332b;--muted:#718078;--line:rgba(29,65,53,.13);
+  --primary:#1c6b55;--primary2:#349071;--accent:#c98747;--danger:#b6534d;
+  --shadow:0 20px 55px rgba(34,57,48,.13);--shadow2:0 10px 30px rgba(34,57,48,.09);
+  --radius:26px;--radius2:18px;--serif:ui-serif,Georgia,"Times New Roman",serif;
   --sans:Inter,ui-sans-serif,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
 }
 html[data-theme="dark"]{
-  color-scheme:dark;
-  --bg:#071510;
-  --bg2:#0b1d17;
-  --surface:rgba(17,38,31,.76);
-  --surface-solid:#10251e;
-  --surface-2:#132d24;
-  --text:#edf4ef;
-  --muted:#9bb0a6;
-  --line:rgba(220,245,232,.10);
-  --primary:#54b58e;
-  --primary-2:#75caa8;
-  --accent:#d5a36c;
-  --accent-soft:#3a2b1e;
-  --shadow:0 22px 60px rgba(0,0,0,.34);
-  --shadow-soft:0 12px 35px rgba(0,0,0,.24);
+  color-scheme:dark;--bg:#071510;--bg2:#0a1d17;--surface:rgba(17,38,31,.80);--solid:#10251e;
+  --surface2:#142e25;--text:#eef5f0;--muted:#9db1a7;--line:rgba(225,247,236,.11);
+  --primary:#58b891;--primary2:#76caa9;--accent:#d8a36a;--danger:#e0877f;
+  --shadow:0 22px 60px rgba(0,0,0,.34);--shadow2:0 12px 35px rgba(0,0,0,.24);
 }
-*{box-sizing:border-box}
-html{scroll-behavior:smooth}
-body{
-  margin:0;
-  min-height:100vh;
-  background:
-    radial-gradient(circle at 10% 0%, rgba(104,169,136,.18), transparent 33%),
-    radial-gradient(circle at 90% 16%, rgba(201,135,71,.14), transparent 30%),
-    linear-gradient(180deg,var(--bg),var(--bg2));
-  color:var(--text);
-  font-family:var(--sans);
-  -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
-}
-button,input,textarea,select{font:inherit}
-button{color:inherit}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 40%,transparent);outline-offset:2px}
-img{max-width:100%}
-.hidden{display:none!important}
-.app-shell{max-width:1320px;margin:auto;padding:18px 18px 110px}
-.glass{background:var(--surface);backdrop-filter:var(--blur);-webkit-backdrop-filter:var(--blur);border:1px solid var(--line);box-shadow:var(--shadow-soft)}
-.topbar{
-  position:sticky;top:12px;z-index:30;
-  display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:14px;align-items:center;
-  padding:12px 14px 12px 16px;border-radius:24px;
-}
-.brand{display:flex;align-items:center;gap:12px;min-width:0}
-.brand-mark{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#1c6b55,#0c4033);box-shadow:inset 0 0 0 1px #fff3,0 10px 25px rgba(20,78,62,.25)}
-.brand-mark svg{width:31px;height:31px}
-.brand-copy{min-width:0}
-.brand-copy strong{font-family:var(--serif);font-size:1.18rem;letter-spacing:.01em;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.brand-copy span{font-size:.72rem;letter-spacing:.11em;text-transform:uppercase;color:var(--muted)}
-.theme-switch{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--surface-solid) 70%,transparent)}
-.theme-switch button{border:0;background:transparent;padding:8px 10px;border-radius:10px;font-size:.78rem;cursor:pointer;color:var(--muted)}
-.theme-switch button.active{background:var(--surface-solid);box-shadow:0 5px 16px rgba(0,0,0,.08);color:var(--text)}
-.gift-button{width:46px;height:46px;border-radius:16px;border:1px solid rgba(201,135,71,.35);background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 14%,var(--surface-solid)),var(--surface-solid));padding:7px;cursor:pointer;box-shadow:0 8px 22px rgba(201,135,71,.17);transition:.2s}
-.gift-button:hover{transform:translateY(-2px) rotate(-2deg)}
-.gift-button img{width:100%;height:100%;object-fit:contain;display:block}
-.fallback-gift{font-size:1.65rem;display:none}
-.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;margin-top:24px}
-.sidebar{position:sticky;top:105px;align-self:start;padding:14px;border-radius:24px}
-.nav-btn{width:100%;display:flex;align-items:center;gap:12px;border:0;background:transparent;padding:12px 13px;border-radius:15px;cursor:pointer;color:var(--muted);font-weight:650;text-align:left;transition:.18s}
-.nav-btn svg{width:21px;height:21px;flex:0 0 auto}
-.nav-btn:hover{background:color-mix(in srgb,var(--primary) 8%,transparent);color:var(--text)}
-.nav-btn.active{background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 18%,var(--surface-solid)),color-mix(in srgb,var(--primary) 7%,var(--surface-solid)));color:var(--primary);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--primary) 18%,transparent)}
-.side-note{margin-top:14px;padding:15px;border-radius:18px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 15%,var(--surface-solid)),var(--surface-solid));border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line))}
-.side-note small{color:var(--muted)}
-.side-note b{display:block;margin-top:5px;font-family:var(--serif);font-size:1.05rem}
-main{min-width:0}
-.view{display:none;animation:fadeUp .28s ease}
-.view.active{display:block}
-@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
-.hero{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(300px,.82fr);gap:22px}
-.hero-card{position:relative;overflow:hidden;min-height:310px;border-radius:32px;padding:30px;background:linear-gradient(145deg,#123f32,#0c2d24);color:#f4fff9;box-shadow:var(--shadow)}
-.hero-card:before{content:"";position:absolute;inset:auto -70px -100px auto;width:330px;height:330px;border-radius:50%;background:radial-gradient(circle,#7bc4a45e,transparent 67%)}
-.hero-card:after{content:"";position:absolute;left:-50px;top:-70px;width:220px;height:220px;border-radius:50%;background:radial-gradient(circle,#d4a66b35,transparent 70%)}
-.hero-copy{position:relative;z-index:2;max-width:590px}
-.eyebrow{font-size:.74rem;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#a9d4c2}
-.hero h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3.45rem);line-height:1.02;margin:12px 0 14px;font-weight:650}
-.hero p{max-width:54ch;color:#d5e8df;margin:0 0 22px;font-size:1rem}
-.hero-actions{display:flex;gap:10px;flex-wrap:wrap}
-.btn{border:1px solid var(--line);background:var(--surface-solid);color:var(--text);border-radius:14px;padding:11px 15px;font-weight:750;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s}
-.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
-.btn.primary{background:linear-gradient(145deg,var(--primary-2),var(--primary));border-color:transparent;color:white}
-.btn.ghost-light{background:#ffffff13;border-color:#ffffff2d;color:white}
-.btn.soft{background:color-mix(in srgb,var(--primary) 10%,var(--surface-solid));border-color:color-mix(in srgb,var(--primary) 18%,var(--line));color:var(--primary)}
-.btn.danger{color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,var(--surface-solid))}
-.hero-art{position:absolute;right:15px;bottom:0;width:min(44%,380px);height:94%;opacity:.95}
-.dashboard-card{border-radius:30px;padding:22px;min-height:310px}
-.section-kicker{color:var(--muted);font-size:.78rem;text-transform:uppercase;letter-spacing:.12em;font-weight:800}
-.section-title{font-family:var(--serif);font-size:1.65rem;margin:7px 0 5px}
-.section-sub{color:var(--muted);margin:0}
-.mini-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:19px}
-.stat{padding:15px 10px;border-radius:18px;background:var(--surface-2);border:1px solid var(--line);text-align:center}
-.stat strong{font-family:var(--serif);font-size:1.45rem;display:block}
-.stat span{font-size:.72rem;color:var(--muted)}
-.progress-track{height:10px;background:color-mix(in srgb,var(--text) 7%,transparent);border-radius:20px;overflow:hidden;margin-top:18px}
-.progress-track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--primary),var(--accent));width:0;transition:.4s}
-.today-list{display:grid;gap:9px;margin-top:18px}
-.today-item{display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;padding:12px;border-radius:17px;background:var(--surface-solid);border:1px solid var(--line)}
-.today-icon{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:var(--surface-2);font-size:1.1rem}
-.today-item b{display:block;font-size:.91rem}
-.today-item small{color:var(--muted)}
-.quick-check{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface-2);cursor:pointer;font-size:1rem}
-.quick-check.done{background:var(--primary);color:#fff;border-color:transparent}
-.grid{display:grid;gap:20px}
-.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}
-.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
-.card{border-radius:var(--radius);padding:22px}
-.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:15px;margin-bottom:17px}
-.card h2,.card h3{font-family:var(--serif);margin:0}
-.card p{color:var(--muted)}
-.book-card{display:grid;grid-template-columns:145px minmax(0,1fr);gap:20px}
-.book-cover{min-height:210px;border-radius:20px;padding:18px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f5e88b,#d4b334);color:#15251f;box-shadow:0 18px 40px rgba(136,108,20,.24)}
-.book-cover:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 13px,#14261b10 13px 14px)}
-.book-cover>*{position:relative;z-index:1}
-.book-cover small{letter-spacing:.13em;text-transform:uppercase;font-weight:800}
-.book-cover strong{display:block;font-family:var(--serif);font-size:1.9rem;line-height:1.05;margin-top:30px}
-.book-cover span{display:block;margin-top:20px;font-size:.8rem;font-weight:700}
-.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.field{display:grid;gap:6px}
-.field label{font-size:.75rem;color:var(--muted);font-weight:700}
-.input{width:100%;border:1px solid var(--line);background:var(--surface-solid);color:var(--text);border-radius:13px;padding:11px 12px}
-.timer{font-family:var(--serif);font-size:clamp(2.7rem,7vw,5.1rem);letter-spacing:.02em;text-align:center;margin:10px 0 18px}
-.timer-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
-.marker-row{display:flex;flex-wrap:wrap;gap:9px}
-.marker{border:1px solid var(--line);background:var(--surface-solid);border-radius:999px;padding:9px 12px;cursor:pointer;color:var(--muted)}
-.marker:hover,.marker.active{color:var(--primary);border-color:color-mix(in srgb,var(--primary) 35%,var(--line));background:color-mix(in srgb,var(--primary) 8%,var(--surface-solid))}
-.session-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-.session-summary .stat{padding:12px 8px}
-.habit-toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:18px}
-.habits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
-.habit-card{padding:18px;border-radius:22px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-soft);position:relative;overflow:hidden}
-.habit-card:before{content:"";position:absolute;right:-25px;top:-25px;width:90px;height:90px;border-radius:50%;background:color-mix(in srgb,var(--primary) 10%,transparent)}
-.habit-top{display:flex;align-items:center;gap:11px;position:relative}
-.habit-emoji{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:var(--surface-2);font-size:1.35rem}
-.habit-top h3{font-family:var(--sans);font-size:1rem;margin:0}
-.habit-top small{color:var(--muted)}
-.habit-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:16px;position:relative}
-.habit-actions button{border:1px solid var(--line);background:var(--surface-solid);border-radius:12px;padding:9px 6px;cursor:pointer;font-size:.78rem}
-.habit-actions button.active{background:var(--primary);color:#fff;border-color:transparent}
-.habit-foot{display:flex;justify-content:space-between;color:var(--muted);font-size:.72rem;margin-top:12px;position:relative}
-.garden-wrap{min-height:530px;border-radius:32px;overflow:hidden;position:relative;background:linear-gradient(180deg,#0d3228,#071c16);box-shadow:var(--shadow);color:white}
-.garden-info{position:absolute;z-index:3;left:25px;top:24px;max-width:420px}
-.garden-info h2{font-family:var(--serif);font-size:2.1rem;margin:7px 0}
-.garden-info p{color:#c6ddd3;margin:0}
-#gardenSvg{position:absolute;inset:0;width:100%;height:100%}
-.legend{position:absolute;right:20px;top:20px;display:flex;gap:8px;z-index:4;flex-wrap:wrap;justify-content:flex-end}
-.legend span{background:#ffffff13;border:1px solid #ffffff20;border-radius:999px;padding:7px 10px;font-size:.72rem}
-.ideas-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
-.idea-card{border-radius:22px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-soft)}
-.idea-media{aspect-ratio:16/10;background:linear-gradient(145deg,var(--surface-2),color-mix(in srgb,var(--primary) 12%,var(--surface-2)));display:grid;place-items:center;overflow:hidden}
-.idea-media img{width:100%;height:100%;object-fit:cover}
-.idea-media .placeholder{font-size:2rem;opacity:.45}
-.idea-body{padding:15px}
-.idea-body strong{display:block;margin-bottom:4px}
-.idea-body small{color:var(--muted)}
-.empty{padding:34px;text-align:center;border:1px dashed var(--line);border-radius:22px;color:var(--muted);background:color-mix(in srgb,var(--surface-solid) 70%,transparent)}
-.mobile-nav{display:none;position:fixed;z-index:35;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));padding:6px;border-radius:20px;grid-template-columns:repeat(5,1fr)}
-.mobile-nav button{border:0;background:transparent;border-radius:14px;padding:8px 4px;color:var(--muted);font-size:.66rem;font-weight:700;cursor:pointer}
-.mobile-nav svg{display:block;width:20px;height:20px;margin:0 auto 3px}
-.mobile-nav button.active{background:var(--surface-solid);color:var(--primary);box-shadow:0 6px 18px rgba(0,0,0,.09)}
-.modal{position:fixed;inset:0;z-index:100;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(3,13,9,.64);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
-.modal.open{display:flex}
-.modal-card{width:min(620px,100%);max-height:90vh;overflow:auto;border-radius:30px;padding:23px;background:var(--surface-solid);border:1px solid var(--line);box-shadow:0 35px 100px rgba(0,0,0,.34)}
-.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}
-.modal-head h2{font-family:var(--serif);margin:0}
-.close-btn{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:var(--surface-2);cursor:pointer}
-.form-grid{display:grid;gap:12px}
-.gift-modal{padding:0;background:radial-gradient(circle at center,rgba(18,54,43,.78),rgba(2,10,7,.94));}
-.gift-stage{width:min(930px,100%);min-height:min(720px,100vh);position:relative;display:grid;place-items:center;padding:28px;overflow:auto}
-.gift-orbit{position:absolute;border:1px solid #ffffff18;border-radius:50%;animation:spin 24s linear infinite}
-.gift-orbit.o1{width:540px;height:540px}.gift-orbit.o2{width:720px;height:720px;animation-direction:reverse;animation-duration:34s}
-@keyframes spin{to{transform:rotate(360deg)}}
-.gift-card{position:relative;z-index:3;width:min(670px,100%);padding:42px;border-radius:36px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(245,239,224,.92));color:#18332b;border:1px solid #ffffffaa;box-shadow:0 50px 120px rgba(0,0,0,.35);text-align:center;overflow:hidden}
-.gift-card:before{content:"";position:absolute;width:240px;height:240px;left:-100px;top:-110px;border-radius:50%;background:radial-gradient(circle,#78b99a50,transparent 68%)}
-.gift-card:after{content:"";position:absolute;width:270px;height:270px;right:-110px;bottom:-150px;border-radius:50%;background:radial-gradient(circle,#d8a26955,transparent 68%)}
-.gift-card>*{position:relative;z-index:2}
-.gift-emblem{width:90px;height:90px;margin:0 auto 17px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(145deg,#1c6b55,#0c4033);box-shadow:0 18px 40px rgba(20,78,62,.28)}
-.gift-emblem img{width:68px;height:68px;object-fit:contain}
-.gift-card .for{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;font-weight:900;color:#6f7e77}
-.gift-card h1{font-family:var(--serif);font-size:clamp(2.4rem,7vw,4.3rem);margin:10px 0 14px}
-.gift-card .phrase{font-family:var(--serif);font-size:clamp(1.1rem,2.5vw,1.45rem);line-height:1.6;color:#36544a;margin:0 auto;max-width:540px}
-.gift-card .dedication{margin:24px auto 0;max-width:510px;padding-top:22px;border-top:1px solid rgba(24,51,43,.14);color:#5e6f68;line-height:1.7}
-.gift-card .signature{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:#1c6b55;margin-top:14px}
-.gift-close{position:absolute;right:20px;top:20px;z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff2b;background:#ffffff12;color:white;cursor:pointer;font-size:1.2rem}
-.toast{position:fixed;z-index:200;left:50%;bottom:28px;transform:translate(-50%,120px);opacity:0;background:#10251e;color:#fff;border:1px solid #ffffff18;border-radius:999px;padding:11px 16px;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:.25s;pointer-events:none}
-.toast.show{transform:translate(-50%,0);opacity:1}
-@media(max-width:1000px){
-  .layout{grid-template-columns:1fr}.sidebar{display:none}.mobile-nav{display:grid}.app-shell{padding-bottom:105px}.hero{grid-template-columns:1fr}.grid.three{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:720px){
-  .app-shell{padding:10px 10px 100px}.topbar{top:8px;grid-template-columns:1fr auto;padding:10px 11px}.theme-switch{grid-column:1/-1;justify-content:stretch}.theme-switch button{flex:1}.brand-copy span{font-size:.62rem}.gift-button{width:43px;height:43px}.hero-card{padding:24px;min-height:380px}.hero-art{width:72%;height:58%;opacity:.68}.dashboard-card{min-height:auto}.grid.two,.grid.three,.habits-grid,.ideas-grid{grid-template-columns:1fr}.book-card{grid-template-columns:110px 1fr}.book-cover{min-height:170px;padding:14px}.book-cover strong{font-size:1.4rem}.field-row{grid-template-columns:1fr}.session-summary{grid-template-columns:repeat(2,1fr)}.garden-wrap{min-height:620px}.garden-info{right:20px}.legend{top:auto;bottom:16px;left:16px;right:16px;justify-content:flex-start}.gift-card{padding:36px 23px}.gift-stage{padding:14px}.gift-orbit{display:none}
-}
-@media(max-width:440px){.brand-mark{width:41px;height:41px}.brand-copy strong{font-size:1.03rem}.hero h1{font-size:2.2rem}.book-card{grid-template-columns:1fr}.book-cover{min-height:190px}.mini-stats{gap:6px}.stat{padding:12px 5px}.card{padding:17px}}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;min-height:100vh;background:
+radial-gradient(circle at 8% 0%,rgba(89,165,132,.18),transparent 34%),
+radial-gradient(circle at 93% 14%,rgba(201,135,71,.14),transparent 30%),linear-gradient(180deg,var(--bg),var(--bg2));
+color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+button,input,select,textarea{font:inherit}button{color:inherit}img{max-width:100%}.hidden{display:none!important}
+button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid color-mix(in srgb,var(--primary) 38%,transparent);outline-offset:2px}
+.app{max-width:1320px;margin:auto;padding:18px 18px 112px}.glass{background:var(--surface);backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%);border:1px solid var(--line);box-shadow:var(--shadow2)}
+.topbar{position:sticky;top:12px;z-index:35;display:grid;grid-template-columns:minmax(0,1fr) auto auto;gap:13px;align-items:center;padding:12px 14px 12px 16px;border-radius:24px}
+.brand{display:flex;align-items:center;gap:12px;min-width:0}.brand-mark{width:47px;height:47px;border-radius:16px;display:grid;place-items:center;background:linear-gradient(145deg,#1d7058,#0d4034);box-shadow:inset 0 0 0 1px #fff3,0 10px 24px rgba(20,78,62,.25)}.brand-mark svg{width:32px;height:32px}.brand-copy{min-width:0}.brand-copy strong{font-family:var(--serif);font-size:1.18rem;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.brand-copy span{font-size:.69rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.theme{display:flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--solid) 72%,transparent)}.theme button{border:0;background:transparent;padding:8px 10px;border-radius:10px;font-size:.77rem;color:var(--muted);cursor:pointer}.theme button.active{background:var(--solid);color:var(--text);box-shadow:0 5px 15px rgba(0,0,0,.08)}
+.gift{width:47px;height:47px;border-radius:16px;border:1px solid color-mix(in srgb,var(--accent) 35%,var(--line));background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 13%,var(--solid)),var(--solid));padding:7px;cursor:pointer;box-shadow:0 9px 22px rgba(201,135,71,.17);transition:.2s}.gift:hover{transform:translateY(-2px) rotate(-2deg)}.gift img{width:100%;height:100%;object-fit:contain;display:block}.gift-fallback{font-size:1.65rem;display:none}
+.layout{display:grid;grid-template-columns:230px minmax(0,1fr);gap:24px;margin-top:24px}.sidebar{position:sticky;top:105px;align-self:start;padding:14px;border-radius:24px}.nav-btn{width:100%;display:flex;align-items:center;gap:12px;border:0;background:transparent;padding:12px 13px;border-radius:15px;cursor:pointer;color:var(--muted);font-weight:700;text-align:left;transition:.18s}.nav-btn svg{width:21px;height:21px;flex:0 0 auto}.nav-btn:hover{background:color-mix(in srgb,var(--primary) 8%,transparent);color:var(--text)}.nav-btn.active{background:linear-gradient(135deg,color-mix(in srgb,var(--primary) 18%,var(--solid)),color-mix(in srgb,var(--primary) 7%,var(--solid)));color:var(--primary);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--primary) 18%,transparent)}.side-note{margin-top:14px;padding:15px;border-radius:18px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent) 14%,var(--solid)),var(--solid));border:1px solid color-mix(in srgb,var(--accent) 22%,var(--line))}.side-note small{color:var(--muted)}.side-note b{display:block;margin-top:5px;font-family:var(--serif);font-size:1.02rem}
+main{min-width:0}.view{display:none;animation:fade .25s ease}.view.active{display:block}@keyframes fade{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);gap:22px}.hero-card{position:relative;overflow:hidden;min-height:320px;border-radius:32px;padding:30px;background:linear-gradient(145deg,#123f32,#0b2c23);color:#f4fff9;box-shadow:var(--shadow)}.hero-card:before{content:"";position:absolute;right:-95px;bottom:-120px;width:360px;height:360px;border-radius:50%;background:radial-gradient(circle,#7bc4a45e,transparent 67%)}.hero-copy{position:relative;z-index:2;max-width:610px}.eyebrow,.kicker{font-size:.74rem;letter-spacing:.15em;text-transform:uppercase;font-weight:850}.eyebrow{color:#a9d5c2}.kicker{color:var(--muted)}.hero h1{font-family:var(--serif);font-size:clamp(2rem,4vw,3.45rem);line-height:1.03;margin:12px 0 14px}.hero p{max-width:56ch;color:#d5e8df;margin:0 0 22px}.hero-art{position:absolute;right:14px;bottom:0;width:min(44%,380px);height:94%;opacity:.93}.actions{display:flex;gap:10px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--solid);color:var(--text);border-radius:14px;padding:11px 15px;font-weight:760;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.18s}.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(0,0,0,.08)}.btn.primary{background:linear-gradient(145deg,var(--primary2),var(--primary));border-color:transparent;color:#fff}.btn.soft{background:color-mix(in srgb,var(--primary) 10%,var(--solid));border-color:color-mix(in srgb,var(--primary) 18%,var(--line));color:var(--primary)}.btn.ghost{background:#ffffff12;border-color:#ffffff2b;color:#fff}.btn.danger{color:var(--danger);background:color-mix(in srgb,var(--danger) 8%,var(--solid))}.btn.small{padding:8px 11px;border-radius:11px;font-size:.78rem}
+.card{border-radius:var(--radius);padding:22px}.card-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:17px}.card h2,.card h3{font-family:var(--serif);margin:0}.card p{color:var(--muted)}.section-title{font-family:var(--serif);font-size:1.65rem;margin:7px 0 5px}.section-sub{color:var(--muted);margin:0}.grid{display:grid;gap:20px}.grid.two{grid-template-columns:repeat(2,minmax(0,1fr))}.grid.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}.stat{padding:15px 9px;border-radius:18px;background:var(--surface2);border:1px solid var(--line);text-align:center}.stat strong{font-family:var(--serif);font-size:1.46rem;display:block}.stat span{font-size:.71rem;color:var(--muted)}.track{height:10px;background:color-mix(in srgb,var(--text) 7%,transparent);border-radius:20px;overflow:hidden;margin-top:17px}.track i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--primary),var(--accent));width:0;transition:.4s}
+.today-list{display:grid;gap:9px;margin-top:17px}.today-item{display:grid;grid-template-columns:auto 1fr auto;gap:11px;align-items:center;padding:12px;border-radius:17px;background:var(--solid);border:1px solid var(--line)}.today-icon{width:38px;height:38px;border-radius:13px;display:grid;place-items:center;background:var(--surface2);font-size:1.1rem}.today-item b{display:block;font-size:.91rem}.today-item small{color:var(--muted)}.quick{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:var(--surface2);cursor:pointer}.quick.done{background:var(--primary);color:#fff;border-color:transparent}
+.info-card{min-height:180px;display:flex;flex-direction:column}.info-card .btn{margin-top:auto;align-self:flex-start}.explain-box{padding:14px;border-radius:17px;background:var(--surface2);border:1px solid var(--line);font-size:.87rem;color:var(--muted);line-height:1.55}.explain-box b{color:var(--text)}
+.book-card{display:grid;grid-template-columns:145px minmax(0,1fr);gap:20px}.cover{min-height:210px;border-radius:20px;padding:18px;position:relative;overflow:hidden;background:linear-gradient(145deg,#f5e88b,#d4b334);color:#15251f;box-shadow:0 18px 40px rgba(136,108,20,.24)}.cover:after{content:"";position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent 0 13px,#14261b10 13px 14px)}.cover>*{position:relative;z-index:1}.cover small{letter-spacing:.13em;text-transform:uppercase;font-weight:850}.cover strong{display:block;font-family:var(--serif);font-size:1.9rem;line-height:1.05;margin-top:30px}.cover span{display:block;margin-top:20px;font-size:.8rem;font-weight:750}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:grid;gap:6px}.field label{font-size:.75rem;color:var(--muted);font-weight:750}.input{width:100%;border:1px solid var(--line);background:var(--solid);color:var(--text);border-radius:13px;padding:11px 12px}.mode-tabs{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;border:1px solid var(--line);border-radius:16px;background:var(--surface2);margin-bottom:13px}.mode-tabs button{border:0;background:transparent;border-radius:12px;padding:10px;cursor:pointer;color:var(--muted);font-weight:750}.mode-tabs button.active{background:var(--solid);color:var(--primary);box-shadow:0 6px 16px rgba(0,0,0,.07)}.timer{font-family:var(--serif);font-size:clamp(2.7rem,7vw,5rem);letter-spacing:.02em;text-align:center;margin:8px 0 15px}.timer-note{text-align:center;color:var(--muted);font-size:.78rem;min-height:1.25rem}.timer-actions{display:flex;justify-content:center;gap:9px;flex-wrap:wrap}.preset-row{display:flex;gap:7px;justify-content:center;flex-wrap:wrap;margin:12px 0}.preset-row button{border:1px solid var(--line);background:var(--solid);border-radius:999px;padding:7px 10px;cursor:pointer;color:var(--muted);font-size:.76rem}.preset-row button.active{background:var(--primary);color:#fff;border-color:transparent}
+.marker-row{display:flex;flex-wrap:wrap;gap:9px}.marker{border:1px solid var(--line);background:var(--solid);border-radius:999px;padding:9px 12px;cursor:pointer;color:var(--muted)}.marker:hover{color:var(--primary);border-color:color-mix(in srgb,var(--primary) 35%,var(--line));background:color-mix(in srgb,var(--primary) 8%,var(--solid))}.media-actions{display:flex;gap:9px;flex-wrap:wrap}.summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.summary .stat{padding:12px 7px}
+.history-list{display:grid;gap:10px}.history-item{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:13px;border:1px solid var(--line);border-radius:17px;background:var(--solid)}.history-item b{display:block;font-size:.9rem}.history-item small{color:var(--muted);line-height:1.5}.history-item button{border:0;background:transparent;color:var(--danger);cursor:pointer}.history-tools{display:flex;gap:8px;flex-wrap:wrap}.empty{padding:32px;text-align:center;border:1px dashed var(--line);border-radius:22px;color:var(--muted);background:color-mix(in srgb,var(--solid) 70%,transparent)}
+.habit-toolbar{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:18px}.habits-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.habit-card{padding:18px;border-radius:22px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow2);position:relative;overflow:hidden}.habit-card:before{content:"";position:absolute;right:-28px;top:-28px;width:96px;height:96px;border-radius:50%;background:color-mix(in srgb,var(--primary) 10%,transparent)}.habit-top{display:flex;align-items:center;gap:11px;position:relative}.habit-emoji{width:46px;height:46px;border-radius:16px;display:grid;place-items:center;background:var(--surface2);font-size:1.35rem}.habit-top h3{font-family:var(--sans);font-size:1rem;margin:0}.habit-top small{color:var(--muted)}.habit-actions{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:16px;position:relative}.habit-actions button{border:1px solid var(--line);background:var(--solid);border-radius:12px;padding:9px 5px;cursor:pointer;font-size:.77rem}.habit-actions button.active{background:var(--primary);color:#fff;border-color:transparent}.habit-foot{display:flex;justify-content:space-between;color:var(--muted);font-size:.72rem;margin-top:12px;position:relative}.habit-foot button{border:0;background:none;color:var(--muted);cursor:pointer}
+.progress-layout{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr);gap:20px}.garden{min-height:535px;border-radius:32px;overflow:hidden;position:relative;background:linear-gradient(180deg,#0d3328,#071b15);box-shadow:var(--shadow);color:#fff}.garden-copy{position:absolute;z-index:3;left:25px;right:25px;top:24px;max-width:540px}.garden-copy h2{font-family:var(--serif);font-size:2.05rem;margin:7px 0}.garden-copy p{color:#c7ddd4;margin:0}.garden svg{position:absolute;inset:0;width:100%;height:100%}.progress-points{display:grid;gap:10px;margin-top:15px}.point-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:11px;padding:12px;border-radius:16px;background:var(--solid);border:1px solid var(--line)}.point-row span:first-child{width:37px;height:37px;border-radius:13px;background:var(--surface2);display:grid;place-items:center}.point-row small{color:var(--muted)}
+.ideas-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.idea-card{border-radius:22px;overflow:hidden;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow2)}.idea-media{aspect-ratio:16/10;background:linear-gradient(145deg,var(--surface2),color-mix(in srgb,var(--primary) 12%,var(--surface2)));display:grid;place-items:center;overflow:hidden}.idea-media img{width:100%;height:100%;object-fit:cover}.placeholder{font-size:2rem;opacity:.5}.idea-body{padding:15px}.idea-body strong{display:block;margin-bottom:4px}.idea-body small{color:var(--muted)}.idea-body button{display:block;margin-top:10px;border:0;background:none;color:var(--danger);padding:0;cursor:pointer}
+.mobile-nav{display:none;position:fixed;z-index:40;left:12px;right:12px;bottom:max(12px,env(safe-area-inset-bottom));padding:6px;border-radius:20px;grid-template-columns:repeat(5,1fr)}.mobile-nav button{border:0;background:transparent;border-radius:14px;padding:8px 4px;color:var(--muted);font-size:.65rem;font-weight:750;cursor:pointer}.mobile-nav svg{display:block;width:20px;height:20px;margin:0 auto 3px}.mobile-nav button.active{background:var(--solid);color:var(--primary);box-shadow:0 6px 18px rgba(0,0,0,.09)}
+.floating-timer{position:fixed;z-index:80;left:50%;top:max(12px,env(safe-area-inset-top));transform:translate(-50%,-140px);opacity:0;pointer-events:none;width:min(560px,calc(100vw - 22px));border-radius:20px;padding:10px 11px;display:grid;grid-template-columns:auto 1fr auto auto;gap:10px;align-items:center;background:color-mix(in srgb,var(--solid) 90%,transparent);border:1px solid var(--line);box-shadow:0 18px 55px rgba(0,0,0,.24);backdrop-filter:blur(18px);transition:.25s}.floating-timer.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}.float-icon{width:40px;height:40px;border-radius:14px;display:grid;place-items:center;background:color-mix(in srgb,var(--primary) 13%,var(--surface2));font-size:1.1rem}.float-copy b{display:block}.float-copy small{color:var(--muted)}.float-time{font-family:var(--serif);font-size:1.35rem;font-weight:750}.floating-timer.ringing{animation:pulse 1s ease-in-out infinite;border-color:color-mix(in srgb,var(--accent) 60%,var(--line))}@keyframes pulse{50%{box-shadow:0 18px 65px color-mix(in srgb,var(--accent) 28%,transparent)}}
+.modal{position:fixed;inset:0;z-index:110;display:none;align-items:center;justify-content:center;padding:18px;background:rgba(3,13,9,.66);backdrop-filter:blur(15px)}.modal.open{display:flex}.modal-card{width:min(620px,100%);max-height:90vh;overflow:auto;border-radius:30px;padding:23px;background:var(--solid);border:1px solid var(--line);box-shadow:0 35px 100px rgba(0,0,0,.35)}.modal-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:18px}.modal-head h2{font-family:var(--serif);margin:0}.close{width:42px;height:42px;border-radius:14px;border:1px solid var(--line);background:var(--surface2);cursor:pointer}.form-grid{display:grid;gap:12px}
+.camera-card{width:min(760px,100%)}.camera-shell{position:relative;overflow:hidden;border-radius:22px;background:#030705;aspect-ratio:4/3;display:grid;place-items:center}.camera-shell video{width:100%;height:100%;object-fit:cover}.camera-shell .camera-msg{position:absolute;color:#dce9e3;text-align:center;padding:22px;max-width:440px}.camera-actions{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:14px}
+.gift-modal{padding:0;background:radial-gradient(circle at center,rgba(18,54,43,.78),rgba(2,10,7,.94))}.gift-stage{width:min(930px,100%);min-height:min(720px,100vh);position:relative;display:grid;place-items:center;padding:28px;overflow:auto}.gift-orbit{position:absolute;border:1px solid #ffffff18;border-radius:50%;animation:spin 24s linear infinite}.gift-orbit.o1{width:540px;height:540px}.gift-orbit.o2{width:720px;height:720px;animation-direction:reverse;animation-duration:34s}@keyframes spin{to{transform:rotate(360deg)}}.gift-card{position:relative;z-index:3;width:min(670px,100%);padding:42px;border-radius:36px;background:linear-gradient(145deg,rgba(255,255,255,.96),rgba(245,239,224,.93));color:#18332b;border:1px solid #ffffffaa;box-shadow:0 50px 120px rgba(0,0,0,.35);text-align:center;overflow:hidden}.gift-card:before{content:"";position:absolute;width:240px;height:240px;left:-100px;top:-110px;border-radius:50%;background:radial-gradient(circle,#78b99a50,transparent 68%)}.gift-card:after{content:"";position:absolute;width:270px;height:270px;right:-110px;bottom:-150px;border-radius:50%;background:radial-gradient(circle,#d8a26955,transparent 68%)}.gift-card>*{position:relative;z-index:2}.gift-emblem{width:90px;height:90px;margin:0 auto 17px;border-radius:28px;display:grid;place-items:center;background:linear-gradient(145deg,#1c6b55,#0c4033);box-shadow:0 18px 40px rgba(20,78,62,.28)}.gift-emblem img{width:68px;height:68px;object-fit:contain}.gift-card .for{font-size:.74rem;letter-spacing:.2em;text-transform:uppercase;font-weight:900;color:#6f7e77}.gift-card h1{font-family:var(--serif);font-size:clamp(2.4rem,7vw,4.3rem);margin:10px 0 14px}.gift-card .phrase{font-family:var(--serif);font-size:clamp(1.1rem,2.5vw,1.45rem);line-height:1.6;color:#36544a;margin:0 auto;max-width:540px}.gift-card .dedication{margin:24px auto 0;max-width:510px;padding-top:22px;border-top:1px solid rgba(24,51,43,.14);color:#5e6f68;line-height:1.7}.gift-card .signature{font-family:var(--serif);font-style:italic;font-size:1.25rem;color:#1c6b55;margin-top:14px}.gift-close{position:absolute;right:20px;top:20px;z-index:5;width:44px;height:44px;border-radius:50%;border:1px solid #ffffff2b;background:#ffffff12;color:#fff;cursor:pointer;font-size:1.2rem}
+.toast{position:fixed;z-index:210;left:50%;bottom:28px;transform:translate(-50%,120px);opacity:0;background:#10251e;color:#fff;border:1px solid #ffffff18;border-radius:999px;padding:11px 16px;box-shadow:0 16px 40px rgba(0,0,0,.25);transition:.25s;pointer-events:none}.toast.show{transform:translate(-50%,0);opacity:1}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}.sidebar{display:none}.mobile-nav{display:grid}.app{padding-bottom:105px}.hero{grid-template-columns:1fr}.grid.three{grid-template-columns:repeat(2,1fr)}.progress-layout{grid-template-columns:1fr}}
+@media(max-width:720px){.app{padding:10px 10px 100px}.topbar{top:8px;grid-template-columns:1fr auto;padding:10px 11px}.theme{grid-column:1/-1}.theme button{flex:1}.brand-copy span{font-size:.6rem}.hero-card{padding:24px;min-height:385px}.hero-art{width:72%;height:58%;opacity:.67}.grid.two,.grid.three,.habits-grid,.ideas-grid{grid-template-columns:1fr}.book-card{grid-template-columns:110px 1fr}.cover{min-height:170px;padding:14px}.cover strong{font-size:1.4rem}.field-row{grid-template-columns:1fr}.summary{grid-template-columns:repeat(2,1fr)}.garden{min-height:620px}.floating-timer{grid-template-columns:auto 1fr auto}.float-time{grid-column:2}.floating-timer .btn{grid-row:1/3;grid-column:3}.gift-card{padding:36px 23px}.gift-stage{padding:14px}.gift-orbit{display:none}}
+@media(max-width:440px){.brand-mark{width:41px;height:41px}.brand-copy strong{font-size:1.02rem}.hero h1{font-size:2.2rem}.book-card{grid-template-columns:1fr}.cover{min-height:190px}.stats{gap:6px}.stat{padding:12px 5px}.card{padding:17px}}
 </style>
 </head>
 <body>
-<div class="app-shell">
-  <header class="topbar glass">
-    <div class="brand">
-      <div class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 48 48" fill="none">
-          <path d="M8 32c6-7 11-9 16-9s10 2 16 9" stroke="#d9f5e8" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M24 23V12" stroke="#d9f5e8" stroke-width="2.4" stroke-linecap="round"/>
-          <path d="M24 16c-4-6-10-6-12-2 5 1 8 3 12 7M24 17c4-7 10-7 13-3-5 1-9 3-13 8" stroke="#8bd0b2" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="14" cy="33" r="2" fill="#d6a66d"/><circle cx="24" cy="31" r="2.4" fill="#d6a66d"/><circle cx="35" cy="34" r="1.8" fill="#d6a66d"/>
-        </svg>
-      </div>
-      <div class="brand-copy"><strong>Micelio</strong><span>pequeños hábitos que crecen</span></div>
-    </div>
-    <div class="theme-switch" aria-label="Tema de color">
-      <button data-theme-btn="light">Claro</button><button data-theme-btn="dark">Oscuro</button><button data-theme-btn="system">Sistema</button>
-    </div>
-    <button class="gift-button" id="openGift" aria-label="Abrir regalo para Raquel">
-      <img src="regalo.png" alt="Regalo" id="giftIcon"><span class="fallback-gift" id="giftFallback">🎁</span>
-    </button>
-  </header>
-
-  <div class="layout">
-    <aside class="sidebar glass">
-      <button class="nav-btn active" data-view="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/></svg>Hoy</button>
-      <button class="nav-btn" data-view="read"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22z"/><path d="M4 5.5V22"/></svg>Leer</button>
-      <button class="nav-btn" data-view="habits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21a9 9 0 1 0 0-18 9 9 0 0 0 0 18Z"/><path d="m8 12 2.4 2.4L16.5 8"/></svg>Hábitos</button>
-      <button class="nav-btn" data-view="garden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 21V9"/><path d="M12 14c-5 0-8-3-8-8 5 0 8 3 8 8Z"/><path d="M12 12c5 0 8-3 8-8-5 0-8 3-8 8Z"/></svg>Micelio</button>
-      <button class="nav-btn" data-view="ideas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M9 18h6M10 22h4"/><path d="M8.3 14.5A7 7 0 1 1 15.7 14.5C14.8 15.2 14.5 16 14.5 17h-5c0-1-.3-1.8-1.2-2.5Z"/></svg>Ideas</button>
-      <div class="side-note"><small>Idea de hoy</small><b>Hazlo tan pequeño que resulte fácil comenzar.</b></div>
-    </aside>
-
-    <main>
-      <section class="view active" id="view-today">
-        <div class="hero">
-          <article class="hero-card">
-            <div class="hero-copy">
-              <div class="eyebrow" id="todayDate">Hoy</div>
-              <h1>Crecer un poco también cuenta.</h1>
-              <p>Micelio transforma la lectura y los pequeños hábitos en un ecosistema que crece contigo, sin exigirte escribir demasiado.</p>
-              <div class="hero-actions"><button class="btn primary" data-go="read">Comenzar lectura</button><button class="btn ghost-light" data-go="habits">Ver hábitos</button></div>
-            </div>
-            <svg class="hero-art" viewBox="0 0 420 420" fill="none" aria-hidden="true">
-              <g opacity=".88"><path d="M206 407c-10-98-6-192 8-279" stroke="#87c9ad" stroke-width="2"/><path d="M211 227c-44-26-79-19-112 10M213 183c44-24 79-16 111 14M208 281c-55-16-98-2-128 34M212 312c52-12 88 0 115 32" stroke="#5ea487" stroke-width="1.5" opacity=".65"/><path d="M93 239c14 24 42 31 70 18-9-26-38-38-70-18ZM326 199c-14 25-41 34-69 22 8-27 37-41 69-22Z" fill="#74b99b" opacity=".7"/><g transform="translate(145 70)"><path d="M63 45c-7 42-4 76 0 113" stroke="#f0d7aa" stroke-width="11" stroke-linecap="round"/><path d="M4 51c7-35 32-51 60-51s54 16 61 51c-18-9-41-13-61-13S22 42 4 51Z" fill="#d9a86a"/><path d="M18 47c23 8 68 8 93 0" stroke="#f6dfb8" stroke-width="4" opacity=".55"/></g></g>
-            </svg>
-          </article>
-          <article class="dashboard-card glass">
-            <div class="section-kicker">Tu día</div><h2 class="section-title">Un paso amable</h2><p class="section-sub">Marca solo lo que realmente hiciste.</p>
-            <div class="mini-stats"><div class="stat"><strong id="statToday">0</strong><span>hechos hoy</span></div><div class="stat"><strong id="statStreak">0</strong><span>mejor racha</span></div><div class="stat"><strong id="statMinutes">0</strong><span>minutos leídos</span></div></div>
-            <div class="progress-track"><i id="todayProgress"></i></div>
-            <div class="today-list" id="todayList"></div>
-          </article>
-        </div>
-        <div class="grid three" style="margin-top:20px">
-          <article class="card glass"><div class="section-kicker">Lectura actual</div><h3 style="margin-top:8px">Hábitos atómicos</h3><p>Continúa desde la página <b id="quickPage">1</b> y deja que cada sesión sume.</p><button class="btn soft" data-go="read">Abrir libro</button></article>
-          <article class="card glass"><div class="section-kicker">Regla sencilla</div><h3 style="margin-top:8px">Hazlo visible</h3><p>Coloca el libro donde puedas verlo antes del momento en que deseas leer.</p></article>
-          <article class="card glass"><div class="section-kicker">Tu ecosistema</div><h3 style="margin-top:8px" id="gardenLevel">Espora inicial</h3><p id="gardenHint">Completa pequeños hábitos para que el micelio se expanda.</p><button class="btn soft" data-go="garden">Ver crecimiento</button></article>
-        </div>
-      </section>
-
-      <section class="view" id="view-read">
-        <div class="grid two">
-          <article class="card glass">
-            <div class="card-head"><div><div class="section-kicker">Libro actual</div><h2>Tu lectura</h2></div><button class="btn soft" id="editBook">Editar</button></div>
-            <div class="book-card">
-              <div class="book-cover"><small id="coverAuthor">James Clear</small><strong id="coverTitle">Hábitos atómicos</strong><span>Pequeños cambios, resultados que se acumulan</span></div>
-              <div>
-                <h3 id="bookTitle">Hábitos atómicos</h3><p id="bookAuthor">James Clear</p>
-                <div class="field-row"><div class="field"><label>Página actual</label><input class="input" id="currentPage" type="number" min="1" value="1"></div><div class="field"><label>Total de páginas</label><input class="input" id="totalPages" type="number" min="1" value="320"></div></div>
-                <div class="progress-track"><i id="bookProgress"></i></div><p style="font-size:.78rem" id="bookProgressText">0 % completado</p>
-              </div>
-            </div>
-          </article>
-          <article class="card glass">
-            <div class="card-head"><div><div class="section-kicker">Sesión de lectura</div><h2>Concéntrate</h2></div><span id="timerStatus" style="color:var(--muted);font-size:.8rem">Listo</span></div>
-            <div class="timer" id="timer">00:00:00</div>
-            <div class="timer-actions"><button class="btn primary" id="timerStart">Comenzar</button><button class="btn" id="timerPause">Pausar</button><button class="btn" id="timerReset">Reiniciar</button></div>
-            <div class="field-row" style="margin-top:18px"><div class="field"><label>Página inicial</label><input class="input" id="sessionStartPage" type="number" min="1"></div><div class="field"><label>Página final</label><input class="input" id="sessionEndPage" type="number" min="1"></div></div>
-            <button class="btn soft" id="saveSession" style="width:100%;margin-top:12px">Guardar sesión</button>
-          </article>
-        </div>
-        <article class="card glass" style="margin-top:20px">
-          <div class="card-head"><div><div class="section-kicker">Marcadores rápidos</div><h2>Guarda sin escribir</h2></div><button class="btn" id="addPhoto">Añadir foto</button></div>
-          <div class="marker-row" id="markerRow"><button class="marker" data-marker="Idea">💡 Idea</button><button class="marker" data-marker="Psicología">🧠 Psicología</button><button class="marker" data-marker="Aplicar">🔁 Aplicar</button><button class="marker" data-marker="Recordar">⭐ Recordar</button><button class="marker" data-marker="Biología">🧬 Biología</button><button class="marker" data-marker="Investigar">🔬 Investigar</button></div>
-          <input id="photoInput" type="file" accept="image/*" capture="environment" hidden>
-          <div class="session-summary" style="margin-top:18px"><div class="stat"><strong id="totalSessions">0</strong><span>sesiones</span></div><div class="stat"><strong id="totalReadMinutes">0</strong><span>minutos</span></div><div class="stat"><strong id="totalPagesRead">0</strong><span>páginas</span></div><div class="stat"><strong id="totalIdeas">0</strong><span>ideas</span></div></div>
-        </article>
-      </section>
-
-      <section class="view" id="view-habits">
-        <article class="card glass">
-          <div class="card-head"><div><div class="section-kicker">Pequeños sistemas</div><h2>Tus hábitos</h2><p style="margin:.35rem 0 0">Marca con un toque. No necesitas justificar nada.</p></div><button class="btn primary" id="openHabitModal">Nuevo hábito</button></div>
-          <div class="habit-toolbar"><button class="btn soft template-habit" data-title="Leer 10 minutos" data-emoji="📖">+ Leer</button><button class="btn soft template-habit" data-title="Caminar 15 minutos" data-emoji="🚶">+ Caminar</button><button class="btn soft template-habit" data-title="Preparar agua" data-emoji="💧">+ Agua</button><button class="btn soft template-habit" data-title="Dormir a tiempo" data-emoji="🌙">+ Dormir</button></div>
-          <div class="habits-grid" id="habitsGrid"></div>
-        </article>
-      </section>
-
-      <section class="view" id="view-garden">
-        <div class="garden-wrap">
-          <div class="garden-info"><div class="section-kicker" style="color:#8bc9ae">Tu constancia</div><h2>El micelio recuerda cada pequeño paso.</h2><p>Tu ecosistema no castiga los días difíciles. Solo vuelve a crecer cuando regresas.</p></div>
-          <div class="legend"><span>📖 Lectura</span><span>🌿 Bienestar</span><span>🧠 Aprendizaje</span></div>
-          <svg id="gardenSvg" viewBox="0 0 1000 650" preserveAspectRatio="xMidYMid slice"></svg>
-        </div>
-      </section>
-
-      <section class="view" id="view-ideas">
-        <article class="card glass">
-          <div class="card-head"><div><div class="section-kicker">Citas, fotos y marcas</div><h2>Tus ideas guardadas</h2><p style="margin:.35rem 0 0">Todo lo que marcaste durante tus lecturas aparece aquí.</p></div><button class="btn danger" id="clearIdeas">Limpiar</button></div>
-          <div class="ideas-grid" id="ideasGrid"></div>
-        </article>
-      </section>
-    </main>
+<div class="app">
+<header class="topbar glass">
+  <div class="brand"><div class="brand-mark" aria-hidden="true"><svg viewBox="0 0 48 48" fill="none"><path d="M8 32c6-7 11-9 16-9s10 2 16 9" stroke="#d9f5e8" stroke-width="2.4" stroke-linecap="round"/><path d="M24 23V12" stroke="#d9f5e8" stroke-width="2.4"/><path d="M24 16c-4-6-10-6-12-2 5 1 8 3 12 7M24 17c4-7 10-7 13-3-5 1-9 3-13 8" stroke="#8bd0b2" stroke-width="2.4" stroke-linecap="round"/><circle cx="14" cy="33" r="2" fill="#d6a66d"/><circle cx="24" cy="31" r="2.4" fill="#d6a66d"/><circle cx="35" cy="34" r="1.8" fill="#d6a66d"/></svg></div><div class="brand-copy"><strong>Micelio</strong><span>lectura y pequeños hábitos</span></div></div>
+  <div class="theme" aria-label="Tema"><button data-theme="light">Claro</button><button data-theme="dark">Oscuro</button><button data-theme="system">Sistema</button></div>
+  <button class="gift" id="openGift" aria-label="Regalo para Raquel"><img src="regalo.png" id="giftIcon" alt="Regalo"><span class="gift-fallback" id="giftFallback">🎁</span></button>
+</header>
+<div class="layout">
+<aside class="sidebar glass">
+  <button class="nav-btn active" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5M5 10.5V20h14v-9.5"/></svg>Inicio</button>
+  <button class="nav-btn" data-view="reading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22zM4 5.5V22"/></svg>Lectura</button>
+  <button class="nav-btn" data-view="habits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.4 2.4L16.5 8"/></svg>Hábitos</button>
+  <button class="nav-btn" data-view="progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20V7"/></svg>Progreso</button>
+  <button class="nav-btn" data-view="saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 3h12v18l-6-4-6 4z"/></svg>Guardados</button>
+  <div class="side-note"><small>Idea sencilla</small><b>Hazlo tan pequeño que resulte fácil comenzar.</b></div>
+</aside>
+<main>
+<section class="view active" id="view-home">
+  <div class="hero">
+    <article class="hero-card"><div class="hero-copy"><div class="eyebrow" id="dateLabel">Hoy</div><h1>Leer, avanzar y recordar sin complicaciones.</h1><p>Una herramienta sencilla para acompañar la lectura, registrar pequeños hábitos y guardar citas mediante un toque, una foto o una imagen.</p><div class="actions"><button class="btn primary" data-go="reading">Iniciar sesión de lectura</button><button class="btn ghost" data-go="habits">Marcar hábitos</button></div></div>
+    <svg class="hero-art" viewBox="0 0 420 420" fill="none" aria-hidden="true"><path d="M206 407c-10-98-6-192 8-279" stroke="#87c9ad" stroke-width="2"/><path d="M211 227c-44-26-79-19-112 10M213 183c44-24 79-16 111 14M208 281c-55-16-98-2-128 34M212 312c52-12 88 0 115 32" stroke="#5ea487" stroke-width="1.5" opacity=".65"/><path d="M93 239c14 24 42 31 70 18-9-26-38-38-70-18ZM326 199c-14 25-41 34-69 22 8-27 37-41 69-22Z" fill="#74b99b" opacity=".7"/><g transform="translate(145 70)"><path d="M63 45c-7 42-4 76 0 113" stroke="#f0d7aa" stroke-width="11" stroke-linecap="round"/><path d="M4 51c7-35 32-51 60-51s54 16 61 51c-18-9-41-13-61-13S22 42 4 51Z" fill="#d9a86a"/></g></svg></article>
+    <article class="card glass"><div class="kicker">Resumen de hoy</div><h2 class="section-title">Un paso amable</h2><p class="section-sub">Marca solo lo que realmente hiciste.</p><div class="stats"><div class="stat"><strong id="todayDone">0</strong><span>hábitos hechos</span></div><div class="stat"><strong id="bestStreak">0</strong><span>mejor racha</span></div><div class="stat"><strong id="readMinutes">0</strong><span>minutos leídos</span></div></div><div class="track"><i id="todayBar"></i></div><div class="today-list" id="todayList"></div></article>
   </div>
+  <div class="grid three" style="margin-top:20px">
+    <article class="card glass info-card"><div class="kicker">Lectura actual</div><h3 style="margin-top:8px" id="homeBookTitle">Hábitos atómicos</h3><p>Continúa desde la página <b id="homePage">1</b>. Aquí encontrarás el temporizador, las páginas y los marcadores.</p><button class="btn soft" data-go="reading">Continuar lectura</button></article>
+    <article class="card glass info-card"><div class="kicker">Temporizador</div><h3 style="margin-top:8px">Lectura o Pomodoro</h3><p>Elige un tiempo libre o usa ciclos de concentración y descanso. El aviso sonará al terminar.</p><button class="btn soft" data-go="reading">Configurar tiempo</button></article>
+    <article class="card glass info-card"><div class="kicker">Progreso visual</div><h3 style="margin-top:8px" id="homeLevel">Espora inicial</h3><p>Cada hábito marcado como <b>Hecho</b> suma 1 punto y hace crecer la ilustración.</p><button class="btn soft" data-go="progress">Ver cómo funciona</button></article>
+  </div>
+</section>
+
+<section class="view" id="view-reading">
+  <div class="grid two">
+    <article class="card glass"><div class="card-head"><div><div class="kicker">Libro actual</div><h2>Seguimiento de lectura</h2></div><button class="btn soft" id="editBook">Editar</button></div><div class="book-card"><div class="cover"><small id="coverAuthor">James Clear</small><strong id="coverTitle">Hábitos atómicos</strong><span>Pequeños cambios, resultados que se acumulan</span></div><div><h3 id="bookTitle">Hábitos atómicos</h3><p id="bookAuthor">James Clear</p><div class="field-row"><div class="field"><label>Página actual</label><input class="input" id="currentPage" type="number" min="1"></div><div class="field"><label>Total de páginas</label><input class="input" id="totalPages" type="number" min="1"></div></div><div class="track"><i id="bookBar"></i></div><p id="bookPct" style="font-size:.78rem">0 % completado</p></div></div></article>
+    <article class="card glass"><div class="card-head"><div><div class="kicker">Tiempo de lectura</div><h2>Temporizador</h2></div><span id="timerStatus" style="color:var(--muted);font-size:.8rem">Listo</span></div>
+      <div class="mode-tabs"><button class="active" data-timer-mode="countdown">Temporizador</button><button data-timer-mode="pomodoro">Pomodoro</button></div>
+      <div class="timer-note" id="modeHelp">Elige cuántos minutos deseas leer.</div>
+      <div class="preset-row" id="countdownPresets"><button data-minutes="10">10 min</button><button data-minutes="20" class="active">20 min</button><button data-minutes="30">30 min</button><button data-minutes="45">45 min</button></div>
+      <div class="field" id="customMinutesWrap"><label>Minutos personalizados</label><input class="input" id="customMinutes" type="number" min="1" max="240" value="20"></div>
+      <div class="timer" id="timerDisplay">00:20:00</div>
+      <div class="timer-actions"><button class="btn primary" id="timerStart">Comenzar</button><button class="btn" id="timerPause">Pausar</button><button class="btn danger" id="timerStop">Detener</button></div>
+      <div class="field-row" style="margin-top:17px"><div class="field"><label>Página inicial</label><input class="input" id="startPage" type="number" min="1"></div><div class="field"><label>Página final</label><input class="input" id="endPage" type="number" min="1"></div></div><button class="btn soft" id="saveSession" style="width:100%;margin-top:12px">Guardar sesión en el historial</button>
+    </article>
+  </div>
+  <article class="card glass" style="margin-top:20px"><div class="card-head"><div><div class="kicker">Citas e ideas</div><h2>Guardar sin escribir</h2><p style="margin:.35rem 0 0">Marca una categoría, toma una foto o sube una imagen desde el celular.</p></div></div><div class="marker-row"><button class="marker" data-marker="Idea">💡 Idea</button><button class="marker" data-marker="Psicología">🧠 Psicología</button><button class="marker" data-marker="Aplicar">🔁 Aplicar</button><button class="marker" data-marker="Recordar">⭐ Recordar</button><button class="marker" data-marker="Biología">🧬 Biología</button><button class="marker" data-marker="Investigar">🔬 Investigar</button></div><div class="media-actions" style="margin-top:14px"><button class="btn primary" id="openCamera">📷 Tomar foto</button><button class="btn" id="uploadImage">🖼️ Subir imagen</button><input id="imageInput" type="file" accept="image/*" hidden></div><div class="summary" style="margin-top:18px"><div class="stat"><strong id="totalSessions">0</strong><span>sesiones</span></div><div class="stat"><strong id="totalMinutes">0</strong><span>minutos</span></div><div class="stat"><strong id="totalPagesRead">0</strong><span>páginas</span></div><div class="stat"><strong id="totalSaved">0</strong><span>guardados</span></div></div></article>
+  <article class="card glass" style="margin-top:20px"><div class="card-head"><div><div class="kicker">Historial permanente</div><h2>Sesiones guardadas</h2><p style="margin:.35rem 0 0">Se conserva en el navegador aunque actualices el archivo de GitHub.</p></div><div class="history-tools"><button class="btn small" id="exportBackup">Exportar respaldo</button><button class="btn small" id="importBackup">Importar respaldo</button><input id="backupInput" type="file" accept="application/json,.json" hidden></div></div><div class="history-list" id="historyList"></div></article>
+</section>
+
+<section class="view" id="view-habits"><article class="card glass"><div class="card-head"><div><div class="kicker">Acciones pequeñas</div><h2>Hábitos</h2><p style="margin:.35rem 0 0">Cada día puedes marcar Hecho, Una parte o Hoy no.</p></div><button class="btn primary" id="newHabit">Nuevo hábito</button></div><div class="habit-toolbar"><button class="btn soft template" data-title="Leer 10 minutos" data-emoji="📖" data-goal="10 minutos">+ Leer</button><button class="btn soft template" data-title="Caminar 15 minutos" data-emoji="🚶" data-goal="15 minutos">+ Caminar</button><button class="btn soft template" data-title="Preparar agua" data-emoji="💧" data-goal="1 vez">+ Agua</button><button class="btn soft template" data-title="Dormir a tiempo" data-emoji="🌙" data-goal="Hora elegida">+ Dormir</button></div><div class="habits-grid" id="habitsGrid"></div></article></section>
+
+<section class="view" id="view-progress"><div class="progress-layout"><div class="garden"><div class="garden-copy"><div class="eyebrow">Progreso visual</div><h2 id="progressLevel">Espora inicial</h2><p id="progressExplain">Cada hábito marcado como Hecho suma 1 punto. La ilustración se vuelve más completa a medida que acumulas constancia.</p></div><svg id="gardenSvg" viewBox="0 0 1000 650" preserveAspectRatio="xMidYMid slice"></svg></div><article class="card glass"><div class="kicker">Cómo se calcula</div><h2 class="section-title">Sin fórmulas ocultas</h2><div class="explain-box"><b>1 hábito hecho = 1 punto.</b><br>“Una parte” queda registrada, pero no suma un punto completo. No se pierde nada por descansar.</div><div class="stats"><div class="stat"><strong id="progressPoints">0</strong><span>puntos totales</span></div><div class="stat"><strong id="progressDays">0</strong><span>días activos</span></div><div class="stat"><strong id="progressHabits">0</strong><span>hábitos</span></div></div><div class="progress-points" id="progressBreakdown"></div></article></div></section>
+
+<section class="view" id="view-saved"><article class="card glass"><div class="card-head"><div><div class="kicker">Fotos y marcadores</div><h2>Guardados</h2><p style="margin:.35rem 0 0">Aquí aparecen las categorías, fotografías e imágenes que guardaste durante la lectura.</p></div><button class="btn danger" id="clearSaved">Limpiar todo</button></div><div class="ideas-grid" id="ideasGrid"></div></article></section>
+</main>
+</div>
 </div>
 
 <nav class="mobile-nav glass">
-  <button class="active" data-view="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11.5 12 4l9 7.5M5 10.5V20h14v-9.5"/></svg>Hoy</button>
-  <button data-view="read"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22zM4 5.5V22"/></svg>Leer</button>
-  <button data-view="habits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.4 2.4L16.5 8"/></svg>Hábitos</button>
-  <button data-view="garden"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 21V9M12 14c-5 0-8-3-8-8 5 0 8 3 8 8ZM12 12c5 0 8-3 8-8-5 0-8 3-8 8Z"/></svg>Micelio</button>
-  <button data-view="ideas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M9 18h6M10 22h4M8.3 14.5A7 7 0 1 1 15.7 14.5C14.8 15.2 14.5 16 14.5 17h-5c0-1-.3-1.8-1.2-2.5Z"/></svg>Ideas</button>
+<button class="active" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 11.5 12 4l9 7.5M5 10.5V20h14v-9.5"/></svg>Inicio</button>
+<button data-view="reading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22zM4 5.5V22"/></svg>Lectura</button>
+<button data-view="habits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.4 2.4L16.5 8"/></svg>Hábitos</button>
+<button data-view="progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 20V10M10 20V4M16 20v-7M22 20V7"/></svg>Progreso</button>
+<button data-view="saved"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 3h12v18l-6-4-6 4z"/></svg>Guardados</button>
 </nav>
 
-<div class="modal" id="habitModal">
-  <div class="modal-card"><div class="modal-head"><h2>Nuevo hábito</h2><button class="close-btn" data-close="habitModal">✕</button></div><div class="form-grid"><div class="field"><label>Nombre</label><input class="input" id="habitName" placeholder="Ej. Leer cinco páginas"></div><div class="field-row"><div class="field"><label>Icono</label><select class="input" id="habitEmoji"><option>📖</option><option>🧠</option><option>🧬</option><option>🌿</option><option>💧</option><option>🚶</option><option>🌙</option><option>🧘</option></select></div><div class="field"><label>Meta breve</label><input class="input" id="habitGoal" placeholder="10 minutos"></div></div><button class="btn primary" id="saveHabit">Guardar hábito</button></div></div>
-</div>
-<div class="modal" id="bookModal"><div class="modal-card"><div class="modal-head"><h2>Editar libro</h2><button class="close-btn" data-close="bookModal">✕</button></div><div class="form-grid"><div class="field"><label>Título</label><input class="input" id="editBookTitle"></div><div class="field"><label>Autor</label><input class="input" id="editBookAuthor"></div><button class="btn primary" id="saveBook">Guardar</button></div></div></div>
+<div class="floating-timer" id="floatingTimer"><div class="float-icon" id="floatIcon">⏱️</div><div class="float-copy"><b id="floatTitle">Lectura en curso</b><small id="floatStage">Temporizador</small></div><div class="float-time" id="floatTime">00:20:00</div><button class="btn danger small" id="floatStop">Detener</button></div>
 
-<div class="modal gift-modal" id="giftModal">
-  <div class="gift-stage">
-    <button class="gift-close" data-close="giftModal" aria-label="Cerrar regalo">✕</button>
-    <div class="gift-orbit o1"></div><div class="gift-orbit o2"></div>
-    <article class="gift-card">
-      <div class="gift-emblem"><img src="regalo.png" alt="Regalo para Raquel" onerror="this.style.display='none';this.parentElement.textContent='🎁'"/></div>
-      <div class="for">Un regalo para</div>
-      <h1>Raquel Zeta</h1>
-      <p class="phrase">Que cada página que leas abra una ventana nueva, y que cada pequeño hábito que cultives te acerque con calma a la mujer que deseas seguir siendo.</p>
-      <div class="dedication">Esta aplicación fue pensada para acompañarte sin exigencias: para celebrar tus lecturas, tus ideas y esos pequeños pasos que, casi sin notarlo, terminan transformando la vida.</div>
-      <div class="signature">Con mucho amor, Luis Anto</div>
-    </article>
-  </div>
-</div>
+<div class="modal" id="habitModal"><div class="modal-card"><div class="modal-head"><h2>Nuevo hábito</h2><button class="close" data-close="habitModal">✕</button></div><div class="form-grid"><div class="field"><label>Nombre</label><input class="input" id="habitName" placeholder="Ej. Leer cinco páginas"></div><div class="field-row"><div class="field"><label>Icono</label><select class="input" id="habitEmoji"><option>📖</option><option>🧠</option><option>🧬</option><option>🌿</option><option>💧</option><option>🚶</option><option>🌙</option><option>🧘</option></select></div><div class="field"><label>Meta breve</label><input class="input" id="habitGoal" placeholder="10 minutos"></div></div><button class="btn primary" id="saveHabit">Guardar hábito</button></div></div></div>
+<div class="modal" id="bookModal"><div class="modal-card"><div class="modal-head"><h2>Editar libro</h2><button class="close" data-close="bookModal">✕</button></div><div class="form-grid"><div class="field"><label>Título</label><input class="input" id="editTitle"></div><div class="field"><label>Autor</label><input class="input" id="editAuthor"></div><button class="btn primary" id="saveBook">Guardar</button></div></div></div>
+<div class="modal" id="cameraModal"><div class="modal-card camera-card"><div class="modal-head"><h2>Tomar fotografía</h2><button class="close" data-close="cameraModal">✕</button></div><div class="camera-shell"><video id="cameraVideo" autoplay playsinline muted></video><div class="camera-msg" id="cameraMessage">Solicitando acceso a la cámara…</div></div><div class="camera-actions"><button class="btn primary" id="capturePhoto">Capturar y guardar</button><button class="btn" id="cameraUploadFallback">Subir imagen</button></div></div></div>
+<div class="modal gift-modal" id="giftModal"><div class="gift-stage"><button class="gift-close" data-close="giftModal">✕</button><div class="gift-orbit o1"></div><div class="gift-orbit o2"></div><article class="gift-card"><div class="gift-emblem"><img src="regalo.png" alt="Regalo para Raquel" onerror="this.style.display='none';this.parentElement.textContent='🎁'"></div><div class="for">Un regalo para</div><h1>Raquel</h1><p class="phrase">Que cada página que leas abra una ventana nueva, y que cada pequeño hábito que cultives te acerque con calma a la mujer que deseas seguir siendo.</p><div class="dedication">Esta aplicación fue pensada para acompañarte sin exigencias: para celebrar tus lecturas, tus ideas y esos pequeños pasos que, casi sin notarlo, terminan transformando la vida.</div><div class="signature">Con mucho amor, Luis</div></article></div></div>
 <div class="toast" id="toast">Guardado</div>
 
 <script>
 (()=>{
 'use strict';
-const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
-const KEY='micelio_raquel_v1';
-const todayKey=()=>new Date().toISOString().slice(0,10);
-const initialState={
-  theme:'system',
-  book:{title:'Hábitos atómicos',author:'James Clear',current:1,total:320},
-  habits:[
-    {id:'h_read',title:'Leer 10 minutos',emoji:'📖',goal:'10 minutos',records:{}},
-    {id:'h_water',title:'Preparar agua',emoji:'💧',goal:'1 vez',records:{}},
-    {id:'h_walk',title:'Caminar 15 minutos',emoji:'🚶',goal:'15 minutos',records:{}}
-  ],
-  sessions:[],ideas:[],timerSeconds:0
-};
-let state=load();
-let timerId=null,timerRunning=false,historyModal=null;
-function load(){try{return Object.assign(structuredClone(initialState),JSON.parse(localStorage.getItem(KEY)||'{}'))}catch{return structuredClone(initialState)}}
-function save(){localStorage.setItem(KEY,JSON.stringify(state))}
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const STATE_KEY='micelio_raquel_v1', BACKUP_KEY='micelio_raquel_backup', MIRROR_KEY='micelio_raquel_mirror';
+const DB_NAME='micelio_raquel_db',DB_VERSION=2;
+const clone=o=>JSON.parse(JSON.stringify(o));
+const initial={version:3,updatedAt:0,theme:'system',book:{title:'Hábitos atómicos',author:'James Clear',current:1,total:320},habits:[{id:'h_read',title:'Leer 10 minutos',emoji:'📖',goal:'10 minutos',records:{}},{id:'h_water',title:'Preparar agua',emoji:'💧',goal:'1 vez',records:{}},{id:'h_walk',title:'Caminar 15 minutos',emoji:'🚶',goal:'15 minutos',records:{}}],sessions:[],ideas:[],timer:{mode:'countdown',selectedMinutes:20,remaining:1200,running:false,endAt:0,stage:'focus',elapsed:0}};
+let state=loadLocal(),db=null,saveTimer=null,stream=null,audioCtx=null,alarmTimer=null,modalHistory=null,tickId=null;
+const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
+function merge(base,data){const out={...clone(base),...(data||{})};out.book={...base.book,...(data?.book||{})};out.timer={...base.timer,...(data?.timer||{})};out.habits=Array.isArray(data?.habits)?data.habits:clone(base.habits);out.sessions=Array.isArray(data?.sessions)?data.sessions:[];out.ideas=Array.isArray(data?.ideas)?data.ideas:[];return out}
+function readJSON(k){try{return JSON.parse(localStorage.getItem(k)||'null')}catch{return null}}
+function loadLocal(){const candidates=[readJSON(STATE_KEY),readJSON(BACKUP_KEY),readJSON(MIRROR_KEY)].filter(Boolean).sort((a,b)=>(b.updatedAt||0)-(a.updatedAt||0));return merge(initial,candidates[0])}
+function persistLocal(){state.updatedAt=Date.now();const raw=JSON.stringify(state);try{localStorage.setItem(BACKUP_KEY,localStorage.getItem(STATE_KEY)||raw)}catch{}try{localStorage.setItem(STATE_KEY,raw)}catch{}try{localStorage.setItem(MIRROR_KEY,raw)}catch{}scheduleDbSave()}
+function scheduleDbSave(){clearTimeout(saveTimer);saveTimer=setTimeout(async()=>{try{await idbPut('state',{id:'main',value:clone(state),updatedAt:state.updatedAt})}catch{}},150)}
+function openDb(){return new Promise((resolve,reject)=>{const r=indexedDB.open(DB_NAME,DB_VERSION);r.onupgradeneeded=()=>{const d=r.result;if(!d.objectStoreNames.contains('state'))d.createObjectStore('state',{keyPath:'id'});if(!d.objectStoreNames.contains('media'))d.createObjectStore('media',{keyPath:'id'})};r.onsuccess=()=>{db=r.result;resolve(db)};r.onerror=()=>reject(r.error)})}
+function idbStore(name,mode='readonly'){return db.transaction(name,mode).objectStore(name)}
+function idbPut(store,value){return new Promise((resolve,reject)=>{if(!db)return reject(new Error('DB'));const r=idbStore(store,'readwrite').put(value);r.onsuccess=()=>resolve(value);r.onerror=()=>reject(r.error)})}
+function idbGet(store,key){return new Promise((resolve,reject)=>{if(!db)return resolve(null);const r=idbStore(store).get(key);r.onsuccess=()=>resolve(r.result||null);r.onerror=()=>reject(r.error)})}
+function idbDelete(store,key){return new Promise((resolve,reject)=>{if(!db)return resolve();const r=idbStore(store,'readwrite').delete(key);r.onsuccess=()=>resolve();r.onerror=()=>reject(r.error)})}
+async function hydrateFromDb(){try{await openDb();const saved=await idbGet('state','main');if(saved?.value&&(saved.updatedAt||0)>(state.updatedAt||0))state=merge(initial,saved.value);await migrateInlineImages();renderAll()}catch(e){console.warn(e)}}
+async function migrateInlineImages(){let changed=false;for(const item of state.ideas){if(item.image&&!item.imageId){try{const blob=await (await fetch(item.image)).blob();item.imageId='img_'+item.id;await idbPut('media',{id:item.imageId,blob,createdAt:Date.now()});delete item.image;changed=true}catch{}}}if(changed)persistLocal()}
+if(navigator.storage?.persist)navigator.storage.persist().catch(()=>{});
 function esc(v=''){return String(v).replace(/[&<>'"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[m]))}
-function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1800)}
-function formatTime(s){const h=Math.floor(s/3600),m=Math.floor((s%3600)/60),x=s%60;return [h,m,x].map(n=>String(n).padStart(2,'0')).join(':')}
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('show');clearTimeout(t._x);t._x=setTimeout(()=>t.classList.remove('show'),1900)}
+function format(sec){sec=Math.max(0,Math.floor(sec||0));const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;return [h,m,s].map(n=>String(n).padStart(2,'0')).join(':')}
 function dateLabel(){return new Intl.DateTimeFormat('es-PE',{weekday:'long',day:'numeric',month:'long'}).format(new Date())}
-function setTheme(v){state.theme=v;save();const dark=window.matchMedia('(prefers-color-scheme: dark)').matches;document.documentElement.dataset.theme=v==='system'?(dark?'dark':'light'):v;$$('[data-theme-btn]').forEach(b=>b.classList.toggle('active',b.dataset.themeBtn===v))}
-window.matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change',()=>{if(state.theme==='system')setTheme('system')});
-function switchView(name){$$('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));window.scrollTo({top:0,behavior:'smooth'});if(name==='garden')renderGarden();if(name==='ideas')renderIdeas()}
+function setTheme(v){state.theme=v;persistLocal();const dark=matchMedia('(prefers-color-scheme:dark)').matches;document.documentElement.dataset.theme=v==='system'?(dark?'dark':'light'):v;$$('[data-theme]').forEach(b=>b.classList.toggle('active',b.dataset.theme===v))}
+matchMedia('(prefers-color-scheme:dark)').addEventListener?.('change',()=>{if(state.theme==='system')setTheme('system')});
+function switchView(name){$$('.view').forEach(v=>v.classList.toggle('active',v.id===`view-${name}`));$$('[data-view]').forEach(b=>b.classList.toggle('active',b.dataset.view===name));window.scrollTo({top:0,behavior:'smooth'});if(name==='progress')renderProgress();if(name==='saved')renderIdeas()}
 $$('[data-view]').forEach(b=>b.onclick=()=>switchView(b.dataset.view));$$('[data-go]').forEach(b=>b.onclick=()=>switchView(b.dataset.go));
-function openModal(id){const m=document.getElementById(id);m.classList.add('open');document.body.style.overflow='hidden';historyModal=id;history.pushState({modal:id},'','#'+id)}
-function closeModal(id,fromPop=false){const m=document.getElementById(id);if(!m)return;m.classList.remove('open');document.body.style.overflow='';historyModal=null;if(!fromPop && location.hash==='#'+id) history.back()}
-$$('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));$$('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));
-window.addEventListener('popstate',()=>{if(historyModal)closeModal(historyModal,true)});
-$('#openGift').onclick=()=>openModal('giftModal');$('#giftIcon').onerror=()=>{$('#giftIcon').style.display='none';$('#giftFallback').style.display='block'};
-$$('[data-theme-btn]').forEach(b=>b.onclick=()=>setTheme(b.dataset.themeBtn));
-function habitDoneCount(){return state.habits.filter(h=>h.records?.[todayKey()]==='done').length}
+function openModal(id){const m=$('#'+id);m.classList.add('open');document.body.style.overflow='hidden';modalHistory=id;history.pushState({modal:id},'','#'+id)}
+function closeModal(id,fromPop=false){const m=$('#'+id);if(!m)return;m.classList.remove('open');document.body.style.overflow='';if(id==='cameraModal')stopCamera();modalHistory=null;if(!fromPop&&location.hash==='#'+id)history.back()}
+$$('[data-close]').forEach(b=>b.onclick=()=>closeModal(b.dataset.close));$$('.modal').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)closeModal(m.id)}));window.addEventListener('popstate',()=>{if(modalHistory)closeModal(modalHistory,true)});
+$('#openGift').onclick=()=>openModal('giftModal');$('#giftIcon').onerror=()=>{$('#giftIcon').style.display='none';$('#giftFallback').style.display='block'};$$('[data-theme]').forEach(b=>b.onclick=()=>setTheme(b.dataset.theme));
+function doneToday(){return state.habits.filter(h=>h.records?.[today()]==='done').length}
 function totalDone(){return state.habits.reduce((n,h)=>n+Object.values(h.records||{}).filter(v=>v==='done').length,0)}
-function bestStreak(){
-  const days=new Set();state.habits.forEach(h=>Object.entries(h.records||{}).forEach(([d,v])=>{if(v==='done')days.add(d)}));
-  const sorted=[...days].sort();let best=0,cur=0,prev=null;for(const d of sorted){const dt=new Date(d+'T00:00:00');if(prev&&(dt-prev)===86400000)cur++;else cur=1;best=Math.max(best,cur);prev=dt}return best;
-}
-function totalMinutes(){return Math.round(state.sessions.reduce((n,s)=>n+(s.seconds||0),0)/60)}
-function renderToday(){
-  $('#todayDate').textContent=dateLabel();$('#statToday').textContent=habitDoneCount();$('#statStreak').textContent=bestStreak();$('#statMinutes').textContent=totalMinutes();
-  const pct=state.habits.length?habitDoneCount()/state.habits.length*100:0;$('#todayProgress').style.width=pct+'%';
-  $('#todayList').innerHTML=state.habits.slice(0,4).map(h=>{const done=h.records?.[todayKey()]==='done';return `<div class="today-item"><div class="today-icon">${esc(h.emoji)}</div><div><b>${esc(h.title)}</b><small>${esc(h.goal||'Pequeño paso')}</small></div><button class="quick-check ${done?'done':''}" data-quick="${h.id}">${done?'✓':'○'}</button></div>`}).join('')||'<div class="empty">Añade tu primer hábito.</div>';
-  $$('[data-quick]').forEach(b=>b.onclick=()=>{const h=state.habits.find(x=>x.id===b.dataset.quick);h.records[todayKey()]=h.records[todayKey()]==='done'?'none':'done';save();renderAll()});
-  $('#quickPage').textContent=state.book.current;const d=totalDone();$('#gardenLevel').textContent=d<5?'Espora inicial':d<20?'Primeras hifas':d<50?'Red en crecimiento':'Bosque interior';$('#gardenHint').textContent=d<5?'Completa pequeños hábitos para que el micelio se expanda.':`Tu ecosistema ya conserva ${d} pequeños pasos.`;
-}
-function renderBook(){
-  const b=state.book;$('#bookTitle').textContent=$('#coverTitle').textContent=b.title;$('#bookAuthor').textContent=$('#coverAuthor').textContent=b.author;$('#currentPage').value=b.current;$('#totalPages').value=b.total;$('#sessionStartPage').value=b.current;$('#sessionEndPage').value=b.current;
-  const pct=Math.max(0,Math.min(100,(b.current/Math.max(1,b.total))*100));$('#bookProgress').style.width=pct+'%';$('#bookProgressText').textContent=`${Math.round(pct)} % completado`;
-  $('#timer').textContent=formatTime(state.timerSeconds||0);
-  const mins=totalMinutes(),pages=state.sessions.reduce((n,s)=>n+(s.pages||0),0);$('#totalSessions').textContent=state.sessions.length;$('#totalReadMinutes').textContent=mins;$('#totalPagesRead').textContent=pages;$('#totalIdeas').textContent=state.ideas.length;
-}
-['currentPage','totalPages'].forEach(id=>$('#'+id).addEventListener('change',()=>{state.book[id==='currentPage'?'current':'total']=Math.max(1,Number($('#'+id).value)||1);save();renderAll()}));
-$('#editBook').onclick=()=>{$('#editBookTitle').value=state.book.title;$('#editBookAuthor').value=state.book.author;openModal('bookModal')};
-$('#saveBook').onclick=()=>{state.book.title=$('#editBookTitle').value.trim()||'Mi libro';state.book.author=$('#editBookAuthor').value.trim()||'Autor';save();closeModal('bookModal');renderAll();toast('Libro actualizado')};
-function tick(){state.timerSeconds++;$('#timer').textContent=formatTime(state.timerSeconds);if(state.timerSeconds%10===0)save()}
-$('#timerStart').onclick=()=>{if(timerRunning)return;timerRunning=true;$('#timerStatus').textContent='Leyendo';timerId=setInterval(tick,1000)};
-$('#timerPause').onclick=()=>{timerRunning=false;clearInterval(timerId);$('#timerStatus').textContent='En pausa';save()};
-$('#timerReset').onclick=()=>{timerRunning=false;clearInterval(timerId);state.timerSeconds=0;$('#timer').textContent='00:00:00';$('#timerStatus').textContent='Listo';save()};
-$('#saveSession').onclick=()=>{const a=Math.max(1,Number($('#sessionStartPage').value)||state.book.current),z=Math.max(a,Number($('#sessionEndPage').value)||a);state.sessions.unshift({id:Date.now(),date:todayKey(),seconds:state.timerSeconds,pages:Math.max(0,z-a),start:a,end:z,book:state.book.title});state.book.current=z;state.timerSeconds=0;timerRunning=false;clearInterval(timerId);save();renderAll();toast('Sesión guardada')};
-$$('[data-marker]').forEach(b=>b.onclick=()=>{state.ideas.unshift({id:Date.now(),type:b.dataset.marker,date:todayKey(),book:state.book.title,page:state.book.current,image:null});save();renderAll();toast(`${b.dataset.marker} guardada`)});
-$('#addPhoto').onclick=()=>$('#photoInput').click();
-$('#photoInput').onchange=e=>{const f=e.target.files[0];if(!f)return;const img=new Image();const r=new FileReader();r.onload=()=>img.src=r.result;img.onload=()=>{const max=900,scale=Math.min(1,max/Math.max(img.width,img.height));const c=document.createElement('canvas');c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);c.getContext('2d').drawImage(img,0,0,c.width,c.height);const data=c.toDataURL('image/jpeg',.72);state.ideas.unshift({id:Date.now(),type:'Foto',date:todayKey(),book:state.book.title,page:state.book.current,image:data});if(state.ideas.filter(i=>i.image).length>8){const old=[...state.ideas].reverse().find(i=>i.image);state.ideas=state.ideas.filter(i=>i.id!==old.id)}save();renderAll();toast('Foto guardada')};r.readAsDataURL(f);e.target.value=''};
-function renderHabits(){
-  $('#habitsGrid').innerHTML=state.habits.map(h=>{const s=h.records?.[todayKey()]||'none';const done=Object.values(h.records||{}).filter(v=>v==='done').length;return `<article class="habit-card"><div class="habit-top"><div class="habit-emoji">${esc(h.emoji)}</div><div><h3>${esc(h.title)}</h3><small>${esc(h.goal||'Pequeño paso')}</small></div></div><div class="habit-actions"><button data-status="done" data-id="${h.id}" class="${s==='done'?'active':''}">Hecho</button><button data-status="partial" data-id="${h.id}" class="${s==='partial'?'active':''}">Una parte</button><button data-status="none" data-id="${h.id}" class="${s==='none'?'active':''}">Hoy no</button></div><div class="habit-foot"><span>${done} veces completado</span><button data-delete="${h.id}" style="border:0;background:none;color:var(--muted);cursor:pointer">Eliminar</button></div></article>`}).join('')||'<div class="empty">Todavía no hay hábitos.</div>';
-  $$('[data-status]').forEach(b=>b.onclick=()=>{const h=state.habits.find(x=>x.id===b.dataset.id);h.records[todayKey()]=b.dataset.status;save();renderAll()});$$('[data-delete]').forEach(b=>b.onclick=()=>{if(confirm('¿Eliminar este hábito?')){state.habits=state.habits.filter(h=>h.id!==b.dataset.delete);save();renderAll()}})
-}
-$('#openHabitModal').onclick=()=>openModal('habitModal');
-$('#saveHabit').onclick=()=>{const title=$('#habitName').value.trim();if(!title)return toast('Escribe un nombre');state.habits.push({id:'h_'+Date.now(),title,emoji:$('#habitEmoji').value,goal:$('#habitGoal').value.trim()||'Pequeño paso',records:{}});$('#habitName').value='';$('#habitGoal').value='';save();closeModal('habitModal');renderAll();toast('Hábito creado')};
-$$('.template-habit').forEach(b=>b.onclick=()=>{if(state.habits.some(h=>h.title===b.dataset.title))return toast('Ese hábito ya existe');state.habits.push({id:'h_'+Date.now(),title:b.dataset.title,emoji:b.dataset.emoji,goal:'Pequeño paso',records:{}});save();renderAll();toast('Hábito añadido')});
-function renderGarden(){
-  const svg=$('#gardenSvg'),done=totalDone(),nodes=Math.min(55,7+done);let html='<defs><radialGradient id="g" cx="50%" cy="50%"><stop offset="0" stop-color="#71b99a" stop-opacity=".95"/><stop offset="1" stop-color="#71b99a" stop-opacity="0"/></radialGradient><linearGradient id="cap" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#e2b173"/><stop offset="1" stop-color="#a9693b"/></linearGradient></defs><rect width="1000" height="650" fill="#0a281f"/><ellipse cx="500" cy="630" rx="650" ry="190" fill="#051712"/>';
-  const pts=[];for(let i=0;i<nodes;i++){const x=90+Math.random()*820,y=300+Math.random()*285;pts.push([x,y])}
-  pts.forEach((p,i)=>{if(i){const q=pts[Math.floor(Math.random()*i)];html+=`<path d="M${q[0]} ${q[1]} Q${(q[0]+p[0])/2} ${Math.min(q[1],p[1])-40} ${p[0]} ${p[1]}" stroke="#75b99b" stroke-opacity="${.14+Math.random()*.22}" stroke-width="${1+Math.random()*2}" fill="none"/>`}html+=`<circle cx="${p[0]}" cy="${p[1]}" r="${4+Math.random()*10}" fill="url(#g)"/>`});
-  const mushrooms=Math.min(10,Math.floor(done/4)+1);for(let i=0;i<mushrooms;i++){const x=120+i*(760/Math.max(1,mushrooms-1))+((i%2)*24),y=535-(i%3)*18,s=.65+(i%4)*.12;html+=`<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 0c-2-32 1-58 8-78" stroke="#f0dfbd" stroke-width="15" stroke-linecap="round"/><path d="M-48-72c8-38 31-55 57-55s50 17 57 55c-17-8-38-12-57-12s-40 4-57 12Z" fill="url(#cap)"/><path d="M-33-77c22 7 61 7 83 0" stroke="#f5d5a4" stroke-opacity=".55" stroke-width="4"/></g>`}
-  html+='<g opacity=".35"><circle cx="860" cy="130" r="120" fill="url(#g)"/><circle cx="120" cy="210" r="90" fill="url(#g)"/></g>';svg.innerHTML=html;
-}
-function renderIdeas(){
-  const icons={Idea:'💡',Psicología:'🧠',Aplicar:'🔁',Recordar:'⭐',Biología:'🧬',Investigar:'🔬',Foto:'📷'};
-  $('#ideasGrid').innerHTML=state.ideas.map(i=>`<article class="idea-card"><div class="idea-media">${i.image?`<img src="${i.image}" alt="Cita fotografiada">`:`<div class="placeholder">${icons[i.type]||'💡'}</div>`}</div><div class="idea-body"><strong>${esc(i.type)}</strong><small>${esc(i.book)} · pág. ${i.page||'—'} · ${esc(i.date)}</small><button data-remove-idea="${i.id}" style="display:block;margin-top:10px;border:0;background:none;color:var(--muted);padding:0;cursor:pointer">Eliminar</button></div></article>`).join('')||'<div class="empty" style="grid-column:1/-1">Aún no has guardado citas ni ideas.</div>';
-  $$('[data-remove-idea]').forEach(b=>b.onclick=()=>{state.ideas=state.ideas.filter(i=>String(i.id)!==b.dataset.removeIdea);save();renderAll()})
-}
-$('#clearIdeas').onclick=()=>{if(state.ideas.length&&confirm('¿Eliminar todas las ideas guardadas?')){state.ideas=[];save();renderAll()}};
-function renderAll(){renderToday();renderBook();renderHabits();renderIdeas()}
-setTheme(state.theme||'system');renderAll();
+function activeDays(){const s=new Set();state.habits.forEach(h=>Object.entries(h.records||{}).forEach(([d,v])=>{if(v==='done'||v==='partial')s.add(d)}));return s.size}
+function bestStreak(){const days=new Set();state.habits.forEach(h=>Object.entries(h.records||{}).forEach(([d,v])=>{if(v==='done')days.add(d)}));const sorted=[...days].sort();let best=0,cur=0,prev=null;for(const x of sorted){const d=new Date(x+'T00:00:00');cur=prev&&Math.round((d-prev)/86400000)===1?cur+1:1;best=Math.max(best,cur);prev=d}return best}
+function totalSeconds(){return state.sessions.reduce((n,s)=>n+(s.seconds||0),0)}
+function level(points){return points<5?['Espora inicial','Los primeros pasos ya están registrados.']:points<20?['Primeras hifas','La red empieza a conectarse con cada hábito hecho.']:points<50?['Red en crecimiento','Tu constancia ya forma una red visible.']:points<100?['Micelio consolidado','Los pequeños pasos se están convirtiendo en un sistema.']:['Bosque interior','Has construido una constancia amplia y estable.']}
+function renderHome(){const p=totalDone(),lv=level(p);$('#dateLabel').textContent=dateLabel();$('#todayDone').textContent=doneToday();$('#bestStreak').textContent=bestStreak();$('#readMinutes').textContent=Math.round(totalSeconds()/60);$('#todayBar').style.width=(state.habits.length?doneToday()/state.habits.length*100:0)+'%';$('#homeBookTitle').textContent=state.book.title;$('#homePage').textContent=state.book.current;$('#homeLevel').textContent=lv[0];$('#todayList').innerHTML=state.habits.slice(0,4).map(h=>{const d=h.records?.[today()]==='done';return `<div class="today-item"><div class="today-icon">${esc(h.emoji)}</div><div><b>${esc(h.title)}</b><small>${esc(h.goal||'Pequeño paso')}</small></div><button class="quick ${d?'done':''}" data-quick="${h.id}">${d?'✓':'○'}</button></div>`}).join('')||'<div class="empty">Añade tu primer hábito.</div>';$$('[data-quick]').forEach(b=>b.onclick=()=>{const h=state.habits.find(x=>x.id===b.dataset.quick);h.records=h.records||{};h.records[today()]=h.records[today()]==='done'?'none':'done';persistLocal();renderAll()})}
+function renderBook(){const b=state.book;$('#bookTitle').textContent=$('#coverTitle').textContent=b.title;$('#bookAuthor').textContent=$('#coverAuthor').textContent=b.author;$('#currentPage').value=b.current;$('#totalPages').value=b.total;$('#startPage').value=b.current;$('#endPage').value=b.current;const pct=Math.max(0,Math.min(100,b.current/Math.max(1,b.total)*100));$('#bookBar').style.width=pct+'%';$('#bookPct').textContent=`${Math.round(pct)} % completado`;$('#totalSessions').textContent=state.sessions.length;$('#totalMinutes').textContent=Math.round(totalSeconds()/60);$('#totalPagesRead').textContent=state.sessions.reduce((n,s)=>n+(s.pages||0),0);$('#totalSaved').textContent=state.ideas.length;renderHistory();renderTimer()}
+['currentPage','totalPages'].forEach(id=>$('#'+id).addEventListener('change',()=>{state.book[id==='currentPage'?'current':'total']=Math.max(1,Number($('#'+id).value)||1);persistLocal();renderAll()}));
+$('#editBook').onclick=()=>{$('#editTitle').value=state.book.title;$('#editAuthor').value=state.book.author;openModal('bookModal')};$('#saveBook').onclick=()=>{state.book.title=$('#editTitle').value.trim()||'Mi libro';state.book.author=$('#editAuthor').value.trim()||'Autor';persistLocal();closeModal('bookModal');renderAll();toast('Libro actualizado')};
+function selectedDuration(){return state.timer.mode==='pomodoro'?(state.timer.stage==='break'?300:1500):Math.max(60,(Number($('#customMinutes')?.value)||state.timer.selectedMinutes||20)*60)}
+function timerRemaining(){if(alarmTimer)return 0;if(state.timer.running&&state.timer.endAt)return Math.max(0,Math.ceil((state.timer.endAt-Date.now())/1000));if(Number.isFinite(Number(state.timer.remaining)))return Math.max(0,Number(state.timer.remaining));return selectedDuration()}
+function timerTitle(){if(alarmTimer)return state.timer.mode==='pomodoro'?(state.timer.stage==='break'?'Descanso terminado':'Lectura terminada'):'Tiempo terminado';if(state.timer.mode==='pomodoro')return state.timer.stage==='break'?'Descanso Pomodoro':'Lectura Pomodoro';return 'Lectura en curso'}
+function renderTimer(){const r=timerRemaining();$('#timerDisplay').textContent=format(r);$('#floatTime').textContent=format(r);$('#floatTitle').textContent=timerTitle();$('#floatStage').textContent=state.timer.mode==='pomodoro'?(state.timer.stage==='break'?'5 minutos de descanso':'25 minutos de concentración'):'Temporizador de lectura';$('#floatIcon').textContent=state.timer.stage==='break'?'☕':'⏱️';$('#floatingTimer').classList.toggle('show',state.timer.running||alarmTimer);$('#timerStatus').textContent=alarmTimer?'Tiempo terminado':state.timer.running?'En curso':state.timer.remaining<selectedDuration()?'En pausa':'Listo';$$('[data-timer-mode]').forEach(b=>b.classList.toggle('active',b.dataset.timerMode===state.timer.mode));$('#countdownPresets').classList.toggle('hidden',state.timer.mode!=='countdown');$('#customMinutesWrap').classList.toggle('hidden',state.timer.mode!=='countdown');$('#modeHelp').textContent=state.timer.mode==='pomodoro'?'Pomodoro: 25 min de lectura + 5 min de descanso.':'Elige cuántos minutos deseas leer.'}
+function ensureTick(){clearInterval(tickId);tickId=setInterval(()=>{if(!state.timer.running)return;const r=timerRemaining();state.timer.remaining=r;renderTimer();if(r<=0)finishTimer();else if(r%10===0)persistLocal()},500)}
+function prepareAudio(){const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return;try{if(!audioCtx)audioCtx=new AC();audioCtx.resume?.();const o=audioCtx.createOscillator(),g=audioCtx.createGain();g.gain.value=.00001;o.connect(g).connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+.02)}catch{}}
+function startTimer(){stopAlarm(false);prepareAudio();if(state.timer.running)return;let r=state.timer.remaining;if(!r||r<=0)r=selectedDuration();state.timer.remaining=r;state.timer.running=true;state.timer.endAt=Date.now()+r*1000;persistLocal();renderTimer();ensureTick()}
+function pauseTimer(){if(!state.timer.running)return;state.timer.remaining=timerRemaining();state.timer.running=false;state.timer.endAt=0;persistLocal();renderTimer()}
+function stopTimer(reset=true){const wasRinging=!!alarmTimer;state.timer.running=false;state.timer.endAt=0;state.timer.elapsed=0;stopAlarm();if(reset){if(wasRinging&&state.timer.mode==='pomodoro')state.timer.stage=state.timer.stage==='focus'?'break':'focus';state.timer.remaining=selectedDuration()}persistLocal();renderTimer()}
+function finishTimer(){state.timer.running=false;state.timer.endAt=0;state.timer.remaining=0;startAlarm();renderTimer();persistLocal()}
+function startAlarm(){stopAlarm(false);prepareAudio();const beep=()=>{if(!audioCtx)return;audioCtx.resume?.();const o=audioCtx.createOscillator(),g=audioCtx.createGain();o.type='sine';o.frequency.setValueAtTime(880,audioCtx.currentTime);g.gain.setValueAtTime(.0001,audioCtx.currentTime);g.gain.exponentialRampToValueAtTime(.25,audioCtx.currentTime+.02);g.gain.exponentialRampToValueAtTime(.0001,audioCtx.currentTime+.48);o.connect(g).connect(audioCtx.destination);o.start();o.stop(audioCtx.currentTime+.52)};beep();alarmTimer=setInterval(beep,900);$('#floatingTimer').classList.add('ringing');navigator.vibrate?.([250,150,250,150,450])}
+function stopAlarm(closeAudio=true){if(alarmTimer){clearInterval(alarmTimer);alarmTimer=null}if(closeAudio&&audioCtx){audioCtx.close().catch(()=>{});audioCtx=null}$('#floatingTimer').classList.remove('ringing')}
+$$('[data-timer-mode]').forEach(b=>b.onclick=()=>{stopTimer(false);state.timer.mode=b.dataset.timerMode;state.timer.stage='focus';state.timer.remaining=selectedDuration();persistLocal();renderTimer()});$$('[data-minutes]').forEach(b=>b.onclick=()=>{state.timer.selectedMinutes=Number(b.dataset.minutes);$('#customMinutes').value=state.timer.selectedMinutes;state.timer.remaining=state.timer.selectedMinutes*60;$$('[data-minutes]').forEach(x=>x.classList.toggle('active',x===b));persistLocal();renderTimer()});$('#customMinutes').onchange=()=>{state.timer.selectedMinutes=Math.max(1,Math.min(240,Number($('#customMinutes').value)||20));state.timer.remaining=state.timer.selectedMinutes*60;persistLocal();renderTimer()};$('#timerStart').onclick=startTimer;$('#timerPause').onclick=pauseTimer;$('#timerStop').onclick=()=>stopTimer(true);$('#floatStop').onclick=()=>stopTimer(true);
+$('#saveSession').onclick=()=>{const a=Math.max(1,Number($('#startPage').value)||state.book.current),z=Math.max(a,Number($('#endPage').value)||a);let seconds=0;if(state.timer.running)seconds=Math.max(0,selectedDuration()-timerRemaining());else seconds=Math.max(0,selectedDuration()-(state.timer.remaining||selectedDuration()));if(seconds<1)seconds=state.timer.mode==='pomodoro'?1500:state.timer.selectedMinutes*60;state.sessions.unshift({id:Date.now(),date:new Date().toISOString(),seconds,pages:Math.max(0,z-a),start:a,end:z,book:state.book.title,mode:state.timer.mode});state.book.current=z;stopTimer(true);persistLocal();renderAll();toast('Sesión guardada')};
+function renderHistory(){$('#historyList').innerHTML=state.sessions.slice(0,100).map(s=>{const d=new Intl.DateTimeFormat('es-PE',{dateStyle:'medium',timeStyle:'short'}).format(new Date(s.date));return `<div class="history-item"><div><b>${esc(s.book)} · páginas ${s.start}–${s.end}</b><small>${d} · ${Math.round((s.seconds||0)/60)} min · ${s.pages||0} páginas · ${s.mode==='pomodoro'?'Pomodoro':'Temporizador'}</small></div><button data-del-session="${s.id}">Eliminar</button></div>`}).join('')||'<div class="empty">Todavía no hay sesiones guardadas.</div>';$$('[data-del-session]').forEach(b=>b.onclick=()=>{if(confirm('¿Eliminar esta sesión?')){state.sessions=state.sessions.filter(s=>String(s.id)!==b.dataset.delSession);persistLocal();renderAll()}})}
+$('#exportBackup').onclick=()=>{const blob=new Blob([JSON.stringify({app:'Micelio',exportedAt:new Date().toISOString(),state},null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`micelio-respaldo-${today()}.json`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};$('#importBackup').onclick=()=>$('#backupInput').click();$('#backupInput').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{const data=JSON.parse(await f.text());state=merge(initial,data.state||data);persistLocal();renderAll();toast('Respaldo recuperado')}catch{toast('El archivo no es válido')}e.target.value=''};
+$$('[data-marker]').forEach(b=>b.onclick=()=>{state.ideas.unshift({id:Date.now(),type:b.dataset.marker,date:new Date().toISOString(),book:state.book.title,page:state.book.current,imageId:null});persistLocal();renderAll();toast(`${b.dataset.marker} guardado`)});
+async function compressImage(fileOrBlob){return new Promise((resolve,reject)=>{const url=URL.createObjectURL(fileOrBlob),img=new Image();img.onload=()=>{URL.revokeObjectURL(url);const max=1200,scale=Math.min(1,max/Math.max(img.naturalWidth,img.naturalHeight));const c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.naturalWidth*scale));c.height=Math.max(1,Math.round(img.naturalHeight*scale));c.getContext('2d',{alpha:false}).drawImage(img,0,0,c.width,c.height);c.toBlob(b=>b?resolve(b):reject(new Error('Imagen')),'image/jpeg',.8)};img.onerror=()=>{URL.revokeObjectURL(url);reject(new Error('Imagen'))};img.src=url})}
+async function saveImageBlob(blob,type='Imagen'){try{if(!db)await openDb();const compressed=await compressImage(blob),id='img_'+Date.now()+'_'+Math.random().toString(36).slice(2);await idbPut('media',{id,blob:compressed,createdAt:Date.now()});state.ideas.unshift({id:Date.now(),type,date:new Date().toISOString(),book:state.book.title,page:state.book.current,imageId:id});persistLocal();renderAll();toast('Imagen guardada')}catch(e){console.error(e);toast('No se pudo guardar la imagen')}}
+$('#uploadImage').onclick=()=>$('#imageInput').click();$('#cameraUploadFallback').onclick=()=>{closeModal('cameraModal');setTimeout(()=>$('#imageInput').click(),150)};$('#imageInput').onchange=async e=>{const f=e.target.files[0];if(f)await saveImageBlob(f,'Imagen');e.target.value=''};
+async function startCamera(){openModal('cameraModal');$('#cameraMessage').textContent='Solicitando acceso a la cámara…';$('#cameraMessage').classList.remove('hidden');$('#cameraVideo').classList.add('hidden');try{if(!navigator.mediaDevices?.getUserMedia)throw new Error('No disponible');stream=await navigator.mediaDevices.getUserMedia({video:{facingMode:{ideal:'environment'},width:{ideal:1920},height:{ideal:1080}},audio:false});const v=$('#cameraVideo');v.srcObject=stream;await new Promise(resolve=>{v.onloadedmetadata=resolve;setTimeout(resolve,2000)});await v.play();v.classList.remove('hidden');$('#cameraMessage').classList.add('hidden')}catch(e){console.warn(e);$('#cameraMessage').innerHTML='No se pudo abrir la cámara.<br>En GitHub Pages debe usarse HTTPS y aceptar el permiso.<br>Puedes usar <b>Subir imagen</b>.'}}
+function stopCamera(){if(stream){stream.getTracks().forEach(t=>t.stop());stream=null}const v=$('#cameraVideo');v.srcObject=null}
+$('#openCamera').onclick=startCamera;$('#capturePhoto').onclick=async()=>{const v=$('#cameraVideo');if(!stream||!v.videoWidth)return toast('La cámara aún no está lista');const c=document.createElement('canvas');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);const blob=await new Promise(r=>c.toBlob(r,'image/jpeg',.86));closeModal('cameraModal');if(blob)await saveImageBlob(blob,'Foto')};
+function renderHabits(){$('#habitsGrid').innerHTML=state.habits.map(h=>{const s=h.records?.[today()]||'none',n=Object.values(h.records||{}).filter(v=>v==='done').length;return `<article class="habit-card"><div class="habit-top"><div class="habit-emoji">${esc(h.emoji)}</div><div><h3>${esc(h.title)}</h3><small>${esc(h.goal||'Pequeño paso')}</small></div></div><div class="habit-actions"><button data-status="done" data-id="${h.id}" class="${s==='done'?'active':''}">Hecho</button><button data-status="partial" data-id="${h.id}" class="${s==='partial'?'active':''}">Una parte</button><button data-status="none" data-id="${h.id}" class="${s==='none'?'active':''}">Hoy no</button></div><div class="habit-foot"><span>${n} veces completado</span><button data-del-habit="${h.id}">Eliminar</button></div></article>`}).join('')||'<div class="empty">Todavía no hay hábitos.</div>';$$('[data-status]').forEach(b=>b.onclick=()=>{const h=state.habits.find(x=>x.id===b.dataset.id);h.records=h.records||{};h.records[today()]=b.dataset.status;persistLocal();renderAll()});$$('[data-del-habit]').forEach(b=>b.onclick=()=>{if(confirm('¿Eliminar este hábito?')){state.habits=state.habits.filter(h=>h.id!==b.dataset.delHabit);persistLocal();renderAll()}})}
+$('#newHabit').onclick=()=>openModal('habitModal');$('#saveHabit').onclick=()=>{const title=$('#habitName').value.trim();if(!title)return toast('Escribe un nombre');state.habits.push({id:'h_'+Date.now(),title,emoji:$('#habitEmoji').value,goal:$('#habitGoal').value.trim()||'Pequeño paso',records:{}});$('#habitName').value='';$('#habitGoal').value='';persistLocal();closeModal('habitModal');renderAll();toast('Hábito creado')};$$('.template').forEach(b=>b.onclick=()=>{if(state.habits.some(h=>h.title===b.dataset.title))return toast('Ese hábito ya existe');state.habits.push({id:'h_'+Date.now(),title:b.dataset.title,emoji:b.dataset.emoji,goal:b.dataset.goal,records:{}});persistLocal();renderAll();toast('Hábito añadido')});
+function renderProgress(){const points=totalDone(),lv=level(points);$('#progressLevel').textContent=lv[0];$('#progressExplain').textContent=`${lv[1]} Cada hábito marcado como Hecho suma 1 punto.`;$('#progressPoints').textContent=points;$('#progressDays').textContent=activeDays();$('#progressHabits').textContent=state.habits.length;$('#progressBreakdown').innerHTML=state.habits.map(h=>{const n=Object.values(h.records||{}).filter(v=>v==='done').length;return `<div class="point-row"><span>${esc(h.emoji)}</span><div><b>${esc(h.title)}</b><small>${n} puntos acumulados</small></div><strong>${n}</strong></div>`}).join('')||'<div class="empty">Añade hábitos para comenzar.</div>';const svg=$('#gardenSvg'),mush=Math.min(12,Math.max(1,Math.floor(points/4)+1)),branches=Math.min(28,4+points);let html='<defs><radialGradient id="glow"><stop offset="0" stop-color="#7ed0aa" stop-opacity=".9"/><stop offset="1" stop-color="#7ed0aa" stop-opacity="0"/></radialGradient><linearGradient id="cap"><stop stop-color="#e5b477"/><stop offset="1" stop-color="#a7653a"/></linearGradient></defs><rect width="1000" height="650" fill="#0a281f"/><ellipse cx="500" cy="635" rx="650" ry="190" fill="#051712"/>';
+for(let i=0;i<branches;i++){const x1=500,y1=610,x2=100+((i*137)%800),y2=300+((i*83)%250),cx=(x1+x2)/2+((i%3)-1)*90,cy=390-((i*41)%130);html+=`<path d="M${x1} ${y1} Q${cx} ${cy} ${x2} ${y2}" stroke="#79b99d" stroke-opacity="${.12+(i%5)*.035}" stroke-width="${1+(i%3)}" fill="none"/><circle cx="${x2}" cy="${y2}" r="${10+(i%4)*5}" fill="url(#glow)"/>`}
+for(let i=0;i<mush;i++){const x=100+i*(800/Math.max(1,mush-1)),y=550-(i%3)*20,s=.62+(i%4)*.13;html+=`<g transform="translate(${x} ${y}) scale(${s})"><path d="M0 0c-2-32 1-58 8-78" stroke="#f0dfbd" stroke-width="15" stroke-linecap="round"/><path d="M-48-72c8-38 31-55 57-55s50 17 57 55c-17-8-38-12-57-12s-40 4-57 12Z" fill="url(#cap)"/><path d="M-33-77c22 7 61 7 83 0" stroke="#f5d5a4" stroke-opacity=".55" stroke-width="4"/></g>`}svg.innerHTML=html}
+async function renderIdeas(){const icons={Idea:'💡',Psicología:'🧠',Aplicar:'🔁',Recordar:'⭐',Biología:'🧬',Investigar:'🔬',Foto:'📷',Imagen:'🖼️'};const cards=[];for(const i of state.ideas){let media=`<div class="placeholder">${icons[i.type]||'💡'}</div>`;if(i.imageId){try{const rec=await idbGet('media',i.imageId);if(rec?.blob){const url=URL.createObjectURL(rec.blob);media=`<img src="${url}" alt="Imagen guardada" onload="setTimeout(()=>URL.revokeObjectURL(this.src),5000)">`}}catch{}}cards.push(`<article class="idea-card"><div class="idea-media">${media}</div><div class="idea-body"><strong>${esc(i.type)}</strong><small>${esc(i.book)} · pág. ${i.page||'—'} · ${new Intl.DateTimeFormat('es-PE',{dateStyle:'medium'}).format(new Date(i.date))}</small><button data-del-idea="${i.id}">Eliminar</button></div></article>`)}$('#ideasGrid').innerHTML=cards.join('')||'<div class="empty" style="grid-column:1/-1">Aún no has guardado marcadores ni imágenes.</div>';$$('[data-del-idea]').forEach(b=>b.onclick=async()=>{const item=state.ideas.find(i=>String(i.id)===b.dataset.delIdea);if(item?.imageId)await idbDelete('media',item.imageId).catch(()=>{});state.ideas=state.ideas.filter(i=>String(i.id)!==b.dataset.delIdea);persistLocal();renderAll()})}
+$('#clearSaved').onclick=async()=>{if(!state.ideas.length||!confirm('¿Eliminar todos los guardados?'))return;for(const i of state.ideas)if(i.imageId)await idbDelete('media',i.imageId).catch(()=>{});state.ideas=[];persistLocal();renderAll()};
+function renderAll(){renderHome();renderBook();renderHabits();renderProgress();renderIdeas()}
+setTheme(state.theme||'system');$('#customMinutes').value=state.timer.selectedMinutes||20;if(state.timer.running&&state.timer.endAt<Date.now())finishTimer();renderAll();ensureTick();hydrateFromDb();window.addEventListener('beforeunload',persistLocal);
 })();
 </script>
 </body>
