@@ -103,7 +103,7 @@ main{min-width:0}.view{display:none;animation:fade .25s ease}.view.active{displa
 </header>
 <div class="layout">
 <aside class="sidebar glass">
-  <button class="nav-btn active" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5M5 10.5V20h14v-9.5"/></svg>Inicio1</button>
+  <button class="nav-btn active" data-view="home"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 11.5 12 4l9 7.5M5 10.5V20h14v-9.5"/></svg>Inicio</button>
   <button class="nav-btn" data-view="reading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 5.5A3.5 3.5 0 0 1 7.5 2H20v17H7.5A3.5 3.5 0 0 0 4 22zM4 5.5V22"/></svg>Lectura</button>
   <button class="nav-btn" data-view="habits"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="m8 12 2.4 2.4L16.5 8"/></svg>Tareas</button>
   <button class="nav-btn" data-view="progress"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20V10M10 20V4M16 20v-7M22 20V7"/></svg>Progreso</button>
@@ -152,9 +152,9 @@ main{min-width:0}.view{display:none;animation:fade .25s ease}.view.active{displa
 <section class="view" id="view-progress">
   <div class="progress-dashboard">
     <article class="card glass">
-      <div class="card-head"><div><div class="kicker">Estadísticas claras</div><h2 id="progressMainTitle">Progreso de tareas</h2><p id="progressMainSub" style="margin:.35rem 0 0">Compara tu actividad reciente y la constancia de cada tarea.</p></div></div>
+      <div class="card-head"><div><div class="kicker">Estadísticas claras</div><h2 id="progressMainTitle">Progreso de lectura</h2><p id="progressMainSub" style="margin:.35rem 0 0">Elige un libro y revisa sus sesiones, minutos, páginas y porcentaje completado.</p></div></div>
       <div class="progress-toolbar">
-        <div class="progress-section-tabs" aria-label="Tipo de progreso"><button class="active" data-progress-section="tasks">Tareas</button><button data-progress-section="reading">Lectura</button></div>
+        <div class="progress-section-tabs" aria-label="Tipo de progreso"><button class="active" data-progress-section="reading">Lectura</button><button data-progress-section="tasks">Tareas</button></div>
         <div class="progress-head-actions"><button class="active" data-progress-period="daily">Diario</button><button data-progress-period="weekly">Semanal</button></div>
       </div>
       <div class="progress-book-picker hidden" id="progressBookPickerWrap"><span>Libro que deseas analizar</span><div class="progress-book-list" id="progressBookPicker"></div></div>
@@ -198,7 +198,7 @@ const DB_NAME='micelio_raquel_db',DB_VERSION=2;
 const clone=o=>JSON.parse(JSON.stringify(o));
 const defaultBook={id:'book_atomic',title:'Hábitos atómicos',author:'James Clear',current:1,total:320};
 const initial={version:4,updatedAt:0,theme:'system',book:{...defaultBook},books:[{...defaultBook}],activeBookId:defaultBook.id,habits:[{id:'h_read',title:'Leer 10 minutos',emoji:'📖',goal:'10 minutos',records:{}},{id:'h_water',title:'Preparar agua',emoji:'💧',goal:'1 vez',records:{}},{id:'h_walk',title:'Caminar 15 minutos',emoji:'🚶',goal:'15 minutos',records:{}}],sessions:[],ideas:[],timer:{mode:'countdown',selectedMinutes:20,remaining:1200,running:false,endAt:0,stage:'focus',elapsed:0,compact:false,floatX:null,floatY:null}};
-let state=loadLocal(),db=null,saveTimer=null,audioCtx=null,alarmTimer=null,modalHistory=null,tickId=null,bookEditMode='edit',progressPeriod='daily',progressSection='tasks',progressBookId=null,ideaObjectUrls=[],fullImageUrl=null,pendingReadingImage=null,floatWasDragged=false;
+let state=loadLocal(),db=null,saveTimer=null,audioCtx=null,alarmTimer=null,modalHistory=null,tickId=null,bookEditMode='edit',progressPeriod='daily',progressSection='reading',progressBookId=null,ideaObjectUrls=[],fullImageUrl=null,pendingReadingImage=null,floatWasDragged=false;
 const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
 function normalizeBook(b,index=0){return {id:b?.id||`book_${Date.now()}_${index}`,title:b?.title||'Mi libro',author:b?.author||'Autor',current:Math.max(1,Number(b?.current)||1),total:Math.max(1,Number(b?.total)||1)}}
 function merge(base,data){const out={...clone(base),...(data||{})};const legacy=normalizeBook({...base.book,...(data?.book||{})});out.books=Array.isArray(data?.books)&&data.books.length?data.books.map(normalizeBook):[legacy];out.activeBookId=data?.activeBookId||data?.book?.id||out.books[0].id;let idx=out.books.findIndex(b=>b.id===out.activeBookId);if(idx<0){out.books.unshift(legacy);out.activeBookId=legacy.id;idx=0}if(data?.book)out.books[idx]=normalizeBook({...out.books[idx],...data.book,id:out.books[idx].id},idx);out.book=clone(out.books[idx]);out.timer={...base.timer,...(data?.timer||{})};out.habits=Array.isArray(data?.habits)?data.habits:clone(base.habits);out.sessions=Array.isArray(data?.sessions)?data.sessions:[];out.ideas=Array.isArray(data?.ideas)?data.ideas:[];return out}
